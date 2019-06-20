@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  padding: 5rem 0rem;
+  border-top: 5px solid black;
+  border-bottom: 2px solid black;
+
+  &-nav {
+    // border-: 2px solid black;
+    // border-bottom: 2px solid black;
+
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+  }
+
+  &-social {
+    display: flex;
+    flex-direction: row;
+    div {
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
