@@ -1,0 +1,64 @@
+.project {
+  height: calc(33vw + 2.4rem);
+  background-color: #fbf9f5;
+  border: 2px solid black;
+  display: inline-block;
+  line-height: 0rem;
+  border-right: 1px;
+  position: relative;
+  //   border-bottom: 0;
+
+  &-link {
+    &-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  a {
+    .hover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 9;
+      color: white;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+
+      &-color {
+        background-color: #231f20;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+
+      &-text {
+        z-index: 9;
+        h1 {
+          font-size: calc(2.6rem + 1.25vw);
+        }
+        line-height: calc(2.6rem + 1.25vw);
+      }
+    }
+
+    .hover:hover {
+      opacity: 1;
+      transition: opacity 0.125s linear;
+    }
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

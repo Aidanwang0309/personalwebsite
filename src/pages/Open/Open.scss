@@ -1,0 +1,59 @@
+@import "~bulma/bulma.sass";
+@import "~include-media/dist/_include-media.scss";
+
+.hero-container {
+  width: 100%;
+
+  .hero-bg {
+    canvas {
+      width: 100% !important;
+    }
+  }
+
+  .hero-data {
+    max-width: 480px;
+    position: absolute;
+    right: 10%;
+    top: 25%;
+    .hero-description {
+      text-align: left;
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 auto;
+      line-height: 1.75em;
+
+      span {
+        display: inline-block;
+      }
+
+      .hero-description-header {
+        .intro-hi {
+          margin-top: 1em;
+          color: #636363;
+          font-size: 3rem;
+          font-weight: 700;
+        }
+
+        .intro-firstname {
+          color: #fff;
+          font-size: 3rem;
+          font-weight: 700;
+        }
+
+        .intro-lastname {
+          color: #00d6cf;
+          font-size: 3rem;
+          font-weight: 700;
+        }
+      }
+
+      .hero-description-body {
+      }
+    }
+  }
+}
+
+@include media(">1150px") {
+  .hero-container {
+  }
+}
