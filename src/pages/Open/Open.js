@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../../components/Header/Header";
-import avatar from "../../assets/avatar.png";
+// import Header from "../../components/Header/Header";
+// import avatar from "../../assets/avatar.png";
 import "./Open.scss";
 import * as THREE from "three";
 import {
@@ -227,7 +227,7 @@ class Frontpage extends Component {
                 </div>
               </div>
               <div>
-                <Link className="button" to="/web">
+                <Link className="button" to="/code">
                   Enter
                 </Link>
               </div>

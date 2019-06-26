@@ -1,3 +1,16 @@
+.web-project-grid {
+  position: relative;
+  top: 160px;
+
+  .grid-box:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .grid-box:nth-child(even) {
+    border-right: 0;
+  }
+}
+
 .web-hero {
   max-width: 90%;
   margin: 0 auto;

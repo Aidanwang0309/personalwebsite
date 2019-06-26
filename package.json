@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "bulma": "^0.7.4",
+    "font-awesome": "^4.7.0",
     "include-media": "^1.4.9",
     "node-sass": "^4.11.0",
     "postprocessing": "^6.2.2",

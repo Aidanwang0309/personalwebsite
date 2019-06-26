@@ -1,0 +1,15 @@
+.project-description {
+  top: 160px;
+
+  &-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 10%;
+
+    h1 {
+      font-size: 1.3rem;
+    }
+  }
+}

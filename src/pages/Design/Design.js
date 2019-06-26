@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 
-const UX = () => {
+const Design = () => {
   return (
     <div>
       <Header />
@@ -9,4 +9,4 @@ const UX = () => {
   );
 };
 
-export default UX;
+export default Design;
