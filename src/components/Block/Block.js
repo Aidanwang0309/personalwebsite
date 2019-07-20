@@ -9,9 +9,7 @@ const Block = props => {
   const sizestyles = size === "1" ? { width: "33.3vw" } : { width: "66.6vw" };
 
   const positionstyle =
-    position === "middle"
-      ? { width: "auto", height: "calc(33vw - 10.4rem)" }
-      : null;
+    position === "middle" ? { width: "auto", height: "80%" } : null;
   return (
     <div className={`grid grid-box project ${className}`} style={sizestyles}>
       <Link className="grid-box-link project-link" to={link}>

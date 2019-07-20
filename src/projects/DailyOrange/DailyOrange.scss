@@ -1,0 +1,36 @@
+@import "~include-media/dist/_include-media.scss";
+
+.project-description {
+  @include media("<=tablet") {
+    width: 100vw !important;
+    // height: calc(44vw + 3.4rem);
+  }
+
+  img {
+    height: 90%;
+  }
+}
+
+.project-description-detail {
+  line-height: 1.75rem;
+  font-size: calc(0.1rem + 1vw);
+  &-box {
+    padding-left: 10%;
+  }
+
+  h2 {
+    font-weight: 700;
+    padding-top: 1rem;
+  }
+
+  ul li {
+    list-style: inside;
+  }
+
+  &-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}

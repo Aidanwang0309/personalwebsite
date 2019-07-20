@@ -1,3 +1,5 @@
+@import "~include-media/dist/_include-media.scss";
+
 .App {
   text-align: center;
 }
@@ -41,4 +43,5 @@
   border-right: 1px;
   position: relative;
   overflow: hidden;
+
 }
