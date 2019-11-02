@@ -1,46 +1,53 @@
-import React, { Component } from "react";
-// import Header from "../../components/Header/Header";
-// import avatar from "../../assets/avatar.png";
-import "./Open.scss";
-import * as THREE from "three";
+import React, { Component } from 'react';
+import * as THREE from 'three';
 import {
   BloomEffect,
   EffectComposer,
   EffectPass,
   RenderPass
-} from "postprocessing";
-import { Link } from "react-router-dom";
+} from 'postprocessing';
+import { Link } from 'react-router-dom';
 
-class Frontpage extends Component {
+class Opening extends Component {
   state = {
-    isLoading: true
+    isLoading: true,
+    height: 250
   };
 
   componentDidMount() {
-    console.log(THREE);
+    this.sceneSetup();
+    this.createParticles();
+    this.createPlanet();
+    this.createPlanetOutline();
+    this.createLight();
+    this.createEffect();
+    this.start();
+    document.addEventListener('mousemove', this.onDocumentMouseMove, false);
+    window.addEventListener('resize', this.onWindowResize, false);
+  }
 
-    this.width = this.mount.clientWidth * 0.8;
-    this.height = this.mount.clientHeight;
+  componentWillUnmount() {
+    cancelAnimationFrame(this.frameId);
+    window.removeEventListener('resize', this.onWindowResize);
+    this.el.removeChild(this.renderer.domElement);
+  }
 
-    this.mouseX = 0;
-    this.mouseY = 0;
+  sceneSetup = () => {
+    this.mouseX = -10000;
+    this.mouseY = 1000;
+    this.width = this.el.clientWidth * 0.8;
+    this.height = this.el.clientHeight;
 
-    document.addEventListener("mousemove", this.onDocumentMouseMove, false);
-    window.addEventListener("resize", this.onWindowResize, false);
-    //ADD SCENE
     this.scene = new THREE.Scene();
-
-    //ADD CAMERA
     this.camera = new THREE.PerspectiveCamera(
       105,
       window.innerWidth / window.innerHeight,
       1,
       1000
     );
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
     this.camera.position.z = 400;
-
-    console.log(this.width);
-
     this.camera.setViewOffset(
       this.width * 3,
       800 * 2,
@@ -49,35 +56,22 @@ class Frontpage extends Component {
       this.width,
       800
     );
-    //ADD RENDERER
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setPixelRatio(
       window.devicePixelRatio ? window.devicePixelRatio : 1
     );
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.autoClear = false;
     this.renderer.setClearColor(0x000000, 0.0);
-    this.mount.appendChild(this.renderer.domElement);
-    //ADD CUBE
-    this.circle = new THREE.Object3D();
-    this.skelet = new THREE.Object3D();
+    this.el.appendChild(this.renderer.domElement);
+  };
+
+  createParticles = () => {
     this.particle = new THREE.Object3D();
-
-    this.scene.add(this.circle);
-    this.scene.add(this.skelet);
-    this.scene.add(this.particle);
-
     let geometry = new THREE.TetrahedronGeometry(2, 0);
-    let geom = new THREE.IcosahedronGeometry(7, 1);
-    let geom2 = new THREE.IcosahedronGeometry(15, 1);
-
     let material = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       shading: THREE.FlatShading
     });
-
-    // this.scene.add(mesh1);
-
     for (var i = 0; i < 1000; i++) {
       let mesh = new THREE.Mesh(geometry, material);
       mesh.position
@@ -91,26 +85,37 @@ class Frontpage extends Component {
       );
       this.particle.add(mesh);
     }
+    this.scene.add(this.particle);
+  };
 
+  createPlanet = () => {
+    this.circle = new THREE.Object3D();
+    let geom = new THREE.IcosahedronGeometry(7, 1);
     let mat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       shading: THREE.FlatShading
     });
+    this.planet = new THREE.Mesh(geom, mat);
+    this.planet.scale.x = this.planet.scale.y = this.planet.scale.z = 16;
+    this.circle.add(this.planet);
+    this.scene.add(this.circle);
+  };
 
+  createPlanetOutline = () => {
+    this.skelet = new THREE.Object3D();
+    let geom2 = new THREE.IcosahedronGeometry(15, 1);
     let mat2 = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       wireframe: true,
       side: THREE.DoubleSide
     });
-
-    this.planet = new THREE.Mesh(geom, mat);
-    this.planet.scale.x = this.planet.scale.y = this.planet.scale.z = 16;
-    this.circle.add(this.planet);
-
     this.planet2 = new THREE.Mesh(geom2, mat2);
     this.planet2.scale.x = this.planet2.scale.y = this.planet2.scale.z = 10;
     this.skelet.add(this.planet2);
+    this.scene.add(this.skelet);
+  };
 
+  createLight = () => {
     let ambientLight = new THREE.AmbientLight(0x999999);
     this.scene.add(ambientLight);
 
@@ -124,7 +129,9 @@ class Frontpage extends Component {
     this.scene.add(lights[0]);
     this.scene.add(lights[1]);
     this.scene.add(lights[2]);
+  };
 
+  createEffect = () => {
     //COMPOSER
     this.composer = new EffectComposer(this.renderer);
 
@@ -142,28 +149,12 @@ class Frontpage extends Component {
 
     this.composer.addPass(new RenderPass(this.scene, this.camera));
     this.composer.addPass(effectPass);
-
-    this.start();
-  }
-
-  componentWillUnmount() {
-    this.stop();
-    this.mount.removeChild(this.renderer.domElement);
-  }
-
-  onDocumentMouseMove = event => {
-    this.mouseX = (event.clientX / 3 - this.width) * 10;
-    this.mouseY = (event.clientY / 3 - this.height) * 10;
   };
 
   start = () => {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
     }
-  };
-
-  stop = () => {
-    cancelAnimationFrame(this.frameId);
   };
 
   animate = () => {
@@ -185,6 +176,11 @@ class Frontpage extends Component {
     this.finishLoading();
   };
 
+  onDocumentMouseMove = event => {
+    this.mouseX = (event.clientX / 3 - this.width) * 10;
+    this.mouseY = (event.clientY / 3 - this.height) * 10;
+  };
+
   onWindowResize = () => {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
@@ -194,6 +190,7 @@ class Frontpage extends Component {
   finishLoading = () => {
     this.setState({ isLoading: false });
   };
+
   render() {
     let loadingAnimation = this.state.isLoading ? (
       <div className="loading" />
@@ -202,41 +199,36 @@ class Frontpage extends Component {
     return (
       <React.Fragment>
         {loadingAnimation}
-        {/* <Header /> */}
-        <section className="hero-container">
+        <div className="hero-container">
           <div
             className="hero-bg"
-            ref={mount => {
-              this.mount = mount;
+            ref={ref => {
+              this.el = ref;
             }}
           >
-            <aside className="hero-data">
+            {/* <aside className="hero-data">
               <div className="hero-description">
                 <div className="hero-description-header">
                   <span className="intro-hi">Hi, I'm </span>
                   <br />
-                  <span className="intro-firstname"> Shuai</span>{" "}
+                  <span className="intro-firstname"> Shuai</span>{' '}
                   <span className="intro-lastname">Wang</span>
                 </div>
                 <div className="hero-description-body">
                   <p>A software engineer, music producer, DJ and artist.</p>
-                  <p>
-                    He is currently working as a web developer but also
-                    exploring multimedia and immersive live performance.
-                  </p>
                 </div>
               </div>
               <div>
-                <Link className="button" to="/code">
+                <Link className="button" to="/icode">
                   Enter
                 </Link>
               </div>
-            </aside>
+            </aside> */}
           </div>
-        </section>
+        </div>
       </React.Fragment>
     );
   }
 }
 
-export default Frontpage;
+export default Opening;

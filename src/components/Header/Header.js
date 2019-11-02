@@ -1,33 +1,87 @@
-import React, { useEffect } from "react";
-import "./Header.scss";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Header = () => {
   useEffect(() => {
-    let prevScrollpos = window.pageYOffset;
-    window.addEventListener("scroll", () => {
+    let prevScrollPos = window.pageYOffset;
+    const listener = () => {
       const currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById("nav").style.height = "80px";
+      if (prevScrollPos > currentScrollPos) {
+        document.getElementById('nav').style.height = '80px';
       } else {
-        document.getElementById("nav").style.height = "0px";
+        document.getElementById('nav').style.height = '0px';
       }
-      prevScrollpos = currentScrollPos;
-    });
+      prevScrollPos = currentScrollPos;
+    };
+    window.addEventListener('scroll', listener);
+    return () => window.removeEventListener('scroll', listener);
   }, []);
 
   return (
-    <section className="nav-container">
-      <div className="logo">
-        <a href="/">SHUAI WANG</a>
-      </div>
-      <nav id="nav" className="nav">
-        <Link to="/code">CODE</Link>
-        <Link to="/design">DESIGN</Link>
-        <Link to="/music">MUSIC</Link>
-      </nav>
-    </section>
+    <NavContainer>
+      <Logo>
+        <LogoText href="/">SHUAI WANG</LogoText>
+      </Logo>
+      <Nav id="nav">
+        <NavLink to="/code">CODE</NavLink>
+        <NavLink to="/design">DESIGN</NavLink>
+        <NavLink to="/music">MUSIC</NavLink>
+      </Nav>
+    </NavContainer>
   );
 };
+
+const NavContainer = styled.section`
+  position: relative;
+  z-index: 9;
+  background-color: #fbf9f5;
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  line-height: 0.5;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+`;
+
+const Logo = styled.div`
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  border-bottom: 1px solid black;
+`;
+
+const LogoText = styled.div`
+  color: black;
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate;
+`;
+
+const Nav = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr
+  width: 100%;
+  line-height: 80px;
+  justify-content: space-around;
+  text-align: center;
+  transition: height 0.5s linear;
+`;
+
+const NavLink = styled(Link)`
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  :hover {
+    background-color: #8080803d;
+  }
+`;
 
 export default Header;
