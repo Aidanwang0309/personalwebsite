@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import * as THREE from 'three';
 import {
   BloomEffect,
@@ -8,7 +9,7 @@ import {
   RenderPass
 } from 'postprocessing';
 import { Link } from 'react-router-dom';
-// import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+import { motion } from 'framer-motion';
 
 class Opening extends Component {
   state = {
@@ -194,7 +195,12 @@ class Opening extends Component {
     ) : null;
 
     return (
-      <React.Fragment>
+      <ProjectContainer
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={{ exit: { transition: { staggerChildren: 0.01 } } }}
+    >
         {loadingAnimation}
         <div className="hero-container" style={{ background: 'black' }}>
           <div
@@ -203,29 +209,44 @@ class Opening extends Component {
               this.el = ref;
             }}
           >
-            {/* <aside className="hero-data">
-              <div className="hero-description">
-                <div className="hero-description-header">
-                  <span className="intro-hi">Hi, I'm </span>
-                  <br />
-                  <span className="intro-firstname"> Shuai</span>{' '}
-                  <span className="intro-lastname">Wang</span>
-                </div>
-                <div className="hero-description-body">
-                  <p>A software engineer, music producer, DJ and artist.</p>
-                </div>
-              </div>
-              <div>
-                <Link className="button" to="/icode">
-                  Enter
-                </Link>
-              </div>
-            </aside> */}
+          <Container>
+          <NavLink to="/icode">ENTER</NavLink>
+          </Container>
           </div>
         </div>
-      </React.Fragment>
+       </ProjectContainer>
     );
   }
 }
+const ProjectContainer = styled(motion.div)``
 
+const Container = styled(motion.div)`
+  position:absolute;  
+  right:20%;
+  bottom:20%;
+`
+
+
+const NavLink = styled(Link)`
+  height: 100%;
+  width: 100%;
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate;
+  @keyframes neon2 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  }
+}
+  text-decoration: none;
+  font-size: 5rem;
+  color:white;
+  font-weight:700;
+  :hover {
+   
+  }
+`;
 export default Opening;

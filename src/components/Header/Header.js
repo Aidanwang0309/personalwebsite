@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <NavContainer>
       <Logo>
-        <LogoText href="/">SHUAI WANG</LogoText>
+        <LogoText href="/icode">SHUAI WANG</LogoText>
       </Logo>
       <Nav id="nav">
         <NavLink to="/icode">CODE</NavLink>
@@ -59,9 +59,6 @@ const Logo = styled.div`
 
 const LogoText = styled.div`
   color: black;
-  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-  animation: neon2 1.5s ease-in-out infinite alternate;
 `;
 
 const Nav = styled.div`

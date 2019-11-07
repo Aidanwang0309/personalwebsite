@@ -1,0 +1,13 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+COPY . .
+
+CMD ["npm", "start"]
+
+# docker build -f Dockerfile.dev .  (which file to build)
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app $(id)  
+# (keep the node_modules in current ) and (map the pwd into the /app folder)

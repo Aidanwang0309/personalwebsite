@@ -2,10 +2,10 @@
   "name": "personalwebsite",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://aidanwang0309.github.io/portfoilo/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@popmotion/popcorn": "^0.4.2",
-    "bulma": "^0.8.0",
     "chart.js": "^2.9.2",
     "font-awesome": "^4.7.0",
     "framer-motion": "^1.6.15",
@@ -15,7 +15,6 @@
     "node-sass": "^4.13.0",
     "p5": "^0.10.2",
     "postprocessing": "^6.8.8",
-    "pure-react-carousel": "^1.23.2",
     "react": "^16.11.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.11.0",
@@ -27,7 +26,6 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "react-soundplayer": "^1.0.4",
     "styled-components": "^4.4.1",
     "tableau-api": "^2.2.3",
     "three": "^0.110.0"
