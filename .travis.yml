@@ -1,0 +1,22 @@
+language: generic
+sudo: required
+services:
+  - docker
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e4b8056d1a3a_key -iv $encrypted_e4b8056d1a3a_iv
+    -in travis_rsa.enc -out travis_rsa -d
+  - docker build -t Aidanwang0309 / personalWebsite -f Dockerfile.dev .
+
+install:
+  - export TRAVIS_BUILD_DIR=$(pwd)
+  - mkdir $HOME/src
+  - cd $HOME/src
+  - git clone https://github.com/Aidanwang0309/personalWebsite.git
+  - cd personalWebsite
+  - npm install
+
+script:
+  - docker run -e CI=true Aidanwang0309 / personalWebsite npm run test
+
+after_success:
+  - bash ./deploy.sh
