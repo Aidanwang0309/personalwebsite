@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import throttle from 'lodash/throttle';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   useEffect(() => {
@@ -14,7 +16,7 @@ const Header = () => {
       }
       prevScrollPos = currentScrollPos;
     };
-    window.addEventListener('scroll', listener);
+    window.addEventListener('scroll', throttle(listener, 350));
     return () => window.removeEventListener('scroll', listener);
   }, []);
 
@@ -24,9 +26,9 @@ const Header = () => {
         <LogoText href="/">SHUAI WANG</LogoText>
       </Logo>
       <Nav id="nav">
-        <NavLink to="/code">CODE</NavLink>
-        <NavLink to="/design">DESIGN</NavLink>
-        <NavLink to="/music">MUSIC</NavLink>
+        <NavLink to="/icode">CODE</NavLink>
+        <NavLink to="/idesign">DESIGN</NavLink>
+        <NavLink to="/imusic">MUSIC</NavLink>
       </Nav>
     </NavContainer>
   );
@@ -34,7 +36,7 @@ const Header = () => {
 
 const NavContainer = styled.section`
   position: relative;
-  z-index: 9;
+  z-index: 99;
   background-color: #fbf9f5;
   position: fixed;
   z-index: 11;

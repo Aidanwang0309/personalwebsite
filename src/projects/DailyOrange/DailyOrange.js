@@ -1,66 +1,107 @@
-import React from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import DescriptionBlock from "../../components/DescriptionBlock/DescriptionBlock";
-import Block from "../../components/Block/Block";
-import daily1 from "../../assets/daily1.png";
-import daily2 from "../../assets/daily2.png";
-import "./DailyOrange.scss";
+import React from 'react';
+import styled from 'styled-components';
+import { DescriptionBlock } from 'components/DescriptionBlock';
+import daily1 from 'assets/daily1.png';
+import daily2 from 'assets/daily2.png';
+import { motion } from 'framer-motion';
+import { device } from 'shared/theme';
+
+const transition = {
+  duration: 1,
+  ease: [0.43, 0.13, 0.23, 0.96]
+};
+
+const imageVariants = {
+  exit: { opacity: 0, scale: 0.5, transition },
+  enter: {
+    opacity: 1,
+    scale: 1,
+    transition
+  }
+};
+
+const imageVariants2 = {
+  exit: { opacity: 0, scale: 0.5, transition },
+  enter: {
+    opacity: 1,
+    scale: 1.3,
+    skew: 10,
+    transition
+  }
+};
 
 const DailyOrange = () => {
   return (
-    <div>
-      <Header />
-      <DescriptionBlock size="1" />
+    <Container
+      initial="exit"
+      animate="enter"
+      exit="exit"
+      variants={{ exit: { transition: { staggerChildren: 0.2 } } }}
+    >
       <DescriptionBlock
-        position="middle"
-        size="2"
-        company="The Daily Orange"
-        date="SEP 2016"
-        website="HTTP://DAILYORANGE.COM/2016/11/BASKETBALL-GUIDE-2016/"
+        title="Daily Orange Basketball"
+        brief="This project is to design and create a website to introduce Syracuse
+           Universit Basketball Team. The principle is to utilize the motion
+           design to provide a vivid image of both the team and lead player"
+        stack="PHP | WORDPRESS"
+        platform=" Web/Mobile"
+        category="Web/Design"
+        creator="Shuai Wang"
+        plink="HTTP://DAILYORANGE.COM/2016/11/BASKETBALL-GUIDE-2016"
       />
-      <DescriptionBlock size="1" />
-
-      <div
-        className="grid grid-box project-description-detail"
-        style={{ width: "66.6vw", top: "160px" }}
-      >
-        <div className="project-description-detail-box">
-          <div className="project-description-detail-responsibility">
-            <h2> Responsibility </h2>
-            <ul>
-              <li>Design and build the website personally from scratch</li>
-              <li>Design the theme Page for each persona</li>
-              <li>Wordpress hook Designing</li>
-              <li>REST and API Design</li>
-              <li>
-                Diagnosing problems including Client, HTTP/Network, Server,
-                Database, OS
-              </li>
-            </ul>
-          </div>
-
-          <div className="project-description-detail-idea">
-            <h2> Designing Idea</h2>
-            <ul>
-              <li>
-                Focusing on the Motion from this topic using parallel effect
-              </li>
-              <li>Focusing on the concise and info leading design</li>
-              <li>
-                Focusing on the Mobile Deliverable because on the data driven
-                analysis of the main stream.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <DescriptionBlock size="2" img={daily2} />
-      <DescriptionBlock size="1" />
-      <Footer />
-    </div>
+      <Container>
+        <Image variants={imageVariants} src={daily1} />
+        <Image2 variants={imageVariants2} src={daily2} />
+      </Container>
+    </Container>
   );
 };
+
+const Container = styled(motion.div)`
+  position: relative;
+`;
+
+const Image = styled(motion.img)`
+  position: absolute;
+
+  @media ${device.mobileS} {
+    width: 80%;
+    top: 45%;
+    left: 20%;
+  }
+  @media ${device.tablet} {
+    width: 70%;
+    right: 0px;
+    top: -150px;
+  }
+  @media ${device.laptop} {
+    width: 60%;
+    left: 40%;
+    top: -139px;
+  }
+`;
+
+const Image2 = styled(motion.img)`
+  position: relative;
+  z-index: -1;
+  @media ${device.mobileS} {
+    padding: 5rem 0;
+    width: 68%;
+    bottom: -200px;
+    left: 50px;
+  }
+  @media ${device.tablet} {
+    padding: 3rem 0;
+    width: 60%;
+    left: 27%;
+    bottom: -80px;
+  }
+
+  @media ${device.laptop} {
+    width: 60%;
+    left: 23%;
+    bottom: -139px;
+  }
+`;
 
 export default DailyOrange;

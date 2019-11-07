@@ -1,5 +1,1 @@
-const theme = {
-  backgroundPrimary: '#fbf9f5'
-};
-
-export default theme;
+export { theme, darkTheme, device } from './theme.js';

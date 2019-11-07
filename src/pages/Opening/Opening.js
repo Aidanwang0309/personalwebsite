@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import * as THREE from 'three';
 import {
   BloomEffect,
+  GlitchEffect,
   EffectComposer,
   EffectPass,
   RenderPass
 } from 'postprocessing';
 import { Link } from 'react-router-dom';
+// import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 class Opening extends Component {
   state = {
@@ -137,13 +139,8 @@ class Opening extends Component {
 
     //PASSES
     const bloomEffect = new BloomEffect();
-    bloomEffect.blendMode.opacity.value = 1.0;
-    bloomEffect.setResolutionScale(0.7);
-
-    // const glitchEffect = new GlitchEffect({
-    //   perturbationMap: assets.get("perturbation-map"),
-    //   chromaticAberrationOffset: chromaticAberrationEffect.offset
-    // });
+    bloomEffect.blendMode.opacity.value = 8.0;
+    bloomEffect.setResolutionScale(0.3);
     const effectPass = new EffectPass(this.camera, bloomEffect);
     effectPass.renderToScreen = true;
 
@@ -199,7 +196,7 @@ class Opening extends Component {
     return (
       <React.Fragment>
         {loadingAnimation}
-        <div className="hero-container">
+        <div className="hero-container" style={{ background: 'black' }}>
           <div
             className="hero-bg"
             ref={ref => {
