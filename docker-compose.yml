@@ -9,13 +9,13 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/node_modules
-      - .:/app
-    command: ['npm', 'run', 'test']
+  # test:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - /app/node_modules
+  #     - .:/app
+  #   command: ['npm', 'run', 'test']
 # (keep the node_modules in current ) and (map the pwd into the /app folder)
 # docker exec -it ${id} npm run test (commend)

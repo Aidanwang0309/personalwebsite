@@ -2,7 +2,6 @@
   "name": "personalwebsite",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aidanwang0309.github.io/portfoilo/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@popmotion/popcorn": "^0.4.2",
