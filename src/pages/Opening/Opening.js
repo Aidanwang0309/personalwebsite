@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import * as THREE from 'three';
 import {
   BloomEffect,
-  GlitchEffect,
   EffectComposer,
   EffectPass,
   RenderPass
@@ -196,11 +195,11 @@ class Opening extends Component {
 
     return (
       <ProjectContainer
-      initial="initial"
-      animate="enter"
-      exit="exit"
-      variants={{ exit: { transition: { staggerChildren: 0.01 } } }}
-    >
+        initial="initial"
+        animate="enter"
+        exit="exit"
+        variants={{ exit: { transition: { staggerChildren: 0.01 } } }}
+      >
         {loadingAnimation}
         <div className="hero-container" style={{ background: 'black' }}>
           <div
@@ -209,23 +208,22 @@ class Opening extends Component {
               this.el = ref;
             }}
           >
-          <Container>
-          <NavLink to="/icode">ENTER</NavLink>
-          </Container>
+            <Container>
+              <NavLink to="/icode">ENTER</NavLink>
+            </Container>
           </div>
         </div>
-       </ProjectContainer>
+      </ProjectContainer>
     );
   }
 }
-const ProjectContainer = styled(motion.div)``
+const ProjectContainer = styled(motion.div)``;
 
 const Container = styled(motion.div)`
-  position:absolute;  
-  right:20%;
-  bottom:20%;
-`
-
+  position: absolute;
+  right: 20%;
+  bottom: 20%;
+`;
 
 const NavLink = styled(Link)`
   height: 100%;
@@ -234,19 +232,20 @@ const NavLink = styled(Link)`
   -moz-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;
   @keyframes neon2 {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
+        0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+    }
+    to {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
+        0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+    }
   }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
-  }
-}
   text-decoration: none;
   font-size: 5rem;
-  color:white;
-  font-weight:700;
+  color: white;
+  font-weight: 700;
   :hover {
-   
   }
 `;
 export default Opening;
