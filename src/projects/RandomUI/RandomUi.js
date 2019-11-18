@@ -40,17 +40,6 @@ const Container = styled(motion.div)`
   height: auto;
 `;
 
-const ImageContainer = styled.div`
-  position: relative;
-  height: auto;
-  width: 100%;
-  width: 90%;
-  margin: 7rem auto 3rem auto;
-  img {
-    width: 100%;
-  }
-`;
-
 const SlidesContainer = styled.div`
   position: relative;
   width: 80%;

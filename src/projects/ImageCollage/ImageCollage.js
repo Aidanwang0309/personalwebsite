@@ -6,16 +6,6 @@ import { motion } from 'framer-motion';
 import { transition } from 'shared/animation';
 import collage from 'assets/collage.gif';
 
-const imageVariants = {
-  initial: { scale: 0.9, opacity: 0, x: '30%', y: '30%' },
-  enter: { scale: 1, opacity: 1, x: '30%', y: '30%', transition },
-  exit: {
-    scale: 0.5,
-    opacity: 0,
-    transition: { duration: 1, ...transition }
-  }
-};
-
 const ImageCollage = () => {
   return (
     <Container

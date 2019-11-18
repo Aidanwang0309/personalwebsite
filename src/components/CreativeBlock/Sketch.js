@@ -20,7 +20,7 @@ const Sketch = p => {
   const individualZOffset = 0;
   const lineSpeed = 0.5;
 
-  const newPointsCount = 9;
+  // const newPointsCount = 9;
 
   let font;
   let points = [];

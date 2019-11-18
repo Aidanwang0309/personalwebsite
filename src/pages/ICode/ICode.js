@@ -2,6 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Block } from 'components/Block';
 import { CreativeBlock } from 'components/CreativeBlock';
+
+import { PartyAnimal } from 'projects/PartyAnimal';
+import { SmallProjects } from 'projects/SmallProjects';
+import { Fluz } from 'projects/Fluz';
+import { CreativeCoding } from 'projects/CreativeCoding';
+import { DailyOrange } from 'projects/DailyOrange';
+import { NYCParkCrime } from 'projects/NYCParkCrime';
+import { VJ } from 'projects/VJ';
+import { ImageCollage } from 'projects/ImageCollage';
+import { Marvin } from 'projects/Marvin';
+import { Tension } from 'projects/Tension';
+import { APMotion } from 'projects/APMotion';
+
 import daily from 'assets/dailyorangebs.gif';
 import park from 'assets/park.png';
 import creative from 'assets/creative.gif';
@@ -15,108 +28,127 @@ import vj from 'assets/VJ.png';
 import fluz from 'assets/fluz.png';
 import { motion } from 'framer-motion';
 import { device } from 'shared/theme';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 const ICodeBlockData = [
   {
     id: 1,
+    component: PartyAnimal,
     title: 'Party Animal Manager',
     categories: 'WEB UX/UI',
     image: party,
-    link: 'icode/party-animal',
+    link: 'party-animal',
     size: 2,
     position: 'middle',
     grid: 'g2'
   },
   {
     id: 2,
+    component: SmallProjects,
     title: 'Random Projects',
+    categories: 'WEB UX/UI',
     image: random,
-    link: 'icode/random',
+    link: 'random',
     size: 2,
     grid: 'g3'
   },
   {
     id: 3,
+    component: Fluz,
     title: 'Fluz',
     image: fluz,
-    link: 'icode/fluz',
+    categories: 'WEB UX/UI',
+    link: 'fluz',
     size: 1,
     grid: 'g4'
   },
   {
     id: 4,
+    component: CreativeCoding,
     title: 'CREATIVE CODING',
-    categories: 'WEB / UX/UI ',
+    categories: 'WEB / UX/UI / Design ',
     image: creative,
-    link: 'icode/creative-coding',
+    link: 'creative-coding',
     size: 1,
     position: 'middle',
     grid: 'g5'
   },
   {
     id: 5,
+    component: DailyOrange,
     title: 'DAILY ORANGE BASKET BALL',
     categories: 'WEB UX/UI',
     image: daily,
-    link: 'icode/daily-orange',
+    link: 'daily-orange',
     size: 2,
     position: 'middle',
     grid: 'g6'
   },
   {
     id: 6,
+    component: NYCParkCrime,
     title: 'NYC PARK CRIME DATAV',
     categories: 'WEB / UX/UI / DATA',
     image: park,
-    link: 'icode/park-crime-datav',
+    link: 'park-crime-datav',
     size: 2,
     grid: 'g7'
   },
   {
     id: 7,
+    component: VJ,
     title: 'AUDIO REACTIVE VJ',
     image: vj,
-    link: 'icode/vj',
+    categories: 'Design / AUDIO',
+    link: 'vj',
     size: 1,
     grid: 'g8'
   },
   {
     id: 8,
+    component: ImageCollage,
     title: 'IMAGE COLLAGE',
     image: collage,
-    link: 'icode/image-collage',
+    link: 'image-collage',
+    categories: 'Design',
     size: 1,
     position: 'middle',
     grid: 'g9'
   },
   {
     id: 9,
+    component: Marvin,
     title: 'MARVIN BILLING SYSTEM',
+    categories: 'WEB / UX/UI / DATA',
     image: marvin,
-    link: 'icode/marvin-billing-system',
+    link: 'marvin-billing-system',
     size: 2,
     grid: 'g10'
   },
   {
     id: 10,
+    component: Tension,
     title: 'TENSION OF SELF',
+    categories: 'VR / MUSIC / DANCE',
     image: tension,
-    link: 'icode/tension-of-self',
+    link: 'tension-of-self',
     size: 2,
     grid: 'g11'
   },
   {
     id: 11,
+    component: APMotion,
     title: 'AP DATAV',
-    categories: 'WEB / UX/UI / MOTION CAPTURE ',
+    categories: 'WEB / MOTION CAPTURE / DATA ',
     image: motionpic,
-    link: 'icode/ap-motion',
+    link: 'ap-motion',
     size: 1,
     grid: 'g12'
   }
 ];
 
-const ICode = ({ match }) => {
+const ICode = () => {
+  let match = useRouteMatch();
   return (
     <ProjectContainer
       initial="initial"
@@ -126,20 +158,38 @@ const ICode = ({ match }) => {
     >
       <CreativeBlock />
       {ICodeBlockData.map(
-        ({ id, title, image, link, size, position, grid }) => (
+        ({ id, title, image, link, size, position, grid, categories }) => (
           <Block
             key={id}
             id={id}
             title={title}
             img={image}
-            link={link}
+            link={`${match.url}/${link}`}
             size={size}
             position={position}
             grid={grid}
+            categories={categories}
           />
         )
       )}
     </ProjectContainer>
+  );
+};
+
+const ICodeRouter = () => {
+  let match = useRouteMatch();
+  return (
+    <Switch>
+      {ICodeBlockData.map(({ component, link }, key) => (
+        <Route
+          exact
+          path={`${match.path}/${link}`}
+          key={key}
+          component={component}
+        />
+      ))}
+      <Route path={`${match.path}`} component={ICode} />
+    </Switch>
   );
 };
 
@@ -190,4 +240,4 @@ const ProjectContainer = styled(motion.div)`
 `;
 
 // calc(33vw - 2.4rem)
-export default ICode;
+export default ICodeRouter;

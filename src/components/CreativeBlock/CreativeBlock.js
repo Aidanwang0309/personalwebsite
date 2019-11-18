@@ -4,7 +4,6 @@ import Sketch from './Sketch';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { thumbnailVariants } from 'shared/animation';
-import { device } from 'shared/theme';
 import Media from 'react-media';
 
 const CreativeBlock = ({ word, width }) => {

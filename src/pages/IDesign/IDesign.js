@@ -8,47 +8,58 @@ import spotifycover from 'assets/spotifycover.png';
 import UI4 from 'assets/UI4.png';
 import lawcover from 'assets/lawcover.png';
 import { device } from 'shared/theme';
+import { Law } from 'projects/Law';
+import { Spotify } from 'projects/Spotify';
+import { RandomUI } from 'projects/RandomUI';
+import { Passenger } from 'projects/Passenger';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 const IDesignBlockData = [
   {
     id: 1,
+    component: Passenger,
     title: 'Passenger',
     categories: 'UX/UI',
     image: passenger,
-    link: 'idesign/passenger',
+    link: 'passenger',
     size: 1,
     grid: 'g1'
   },
   {
     id: 2,
+    component: Spotify,
     title: 'Spotify Library Redesign',
     categories: 'UX/UI',
     image: spotifycover,
-    link: 'idesign/spotify',
+    link: 'spotify',
     size: 1,
     grid: 'g2'
   },
   {
     id: 3,
+    component: RandomUI,
     title: 'Random UI',
     categories: 'UX/UI ',
     image: UI4,
-    link: 'idesign/random',
+    link: 'random',
     size: 1,
     grid: 'g3'
   },
   {
     id: 4,
+    component: Law,
     title: 'Law Manager',
     categories: 'UX/UI ',
     image: lawcover,
-    link: 'idesign/law-manager',
+    link: 'law-manager',
     size: 1,
     grid: 'g4'
   }
 ];
 
-const IDesign = ({ match }) => {
+const IDesign = () => {
+  let match = useRouteMatch();
+
   return (
     <ProjectContainer
       initial="initial"
@@ -64,7 +75,7 @@ const IDesign = ({ match }) => {
             id={id}
             title={title}
             img={image}
-            link={link}
+            link={`${match.url}/${link}`}
             size={size}
             position={position}
             grid={grid}
@@ -72,6 +83,23 @@ const IDesign = ({ match }) => {
         )
       )}
     </ProjectContainer>
+  );
+};
+
+const IDesignRouter = () => {
+  let match = useRouteMatch();
+  return (
+    <Switch>
+      {IDesignBlockData.map(({ component, link }, key) => (
+        <Route
+          exact
+          path={`${match.path}/${link}`}
+          key={key}
+          component={component}
+        />
+      ))}
+      <Route path={`${match.path}`} component={IDesign} />
+    </Switch>
   );
 };
 
@@ -109,4 +137,4 @@ const ProjectContainer = styled(motion.div)`
 `;
 
 // calc(33vw - 2.4rem)
-export default IDesign;
+export default IDesignRouter;

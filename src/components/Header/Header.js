@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import throttle from 'lodash/throttle';
-import { motion } from 'framer-motion';
 
 const Header = () => {
   useEffect(() => {
     let prevScrollPos = window.pageYOffset;
     const listener = () => {
       const currentScrollPos = window.pageYOffset;
-      if (prevScrollPos > currentScrollPos) {
+      if (prevScrollPos - currentScrollPos > 100) {
         document.getElementById('nav').style.height = '80px';
-      } else {
+      } else if (currentScrollPos - prevScrollPos > 100) {
         document.getElementById('nav').style.height = '0px';
       }
       prevScrollPos = currentScrollPos;

@@ -23,6 +23,10 @@ const Footer = () => {
           <a href="https://soundcloud.com/aspirin-wang">
             <i className="fa fa-soundcloud" />
           </a>
+          <a href = "mailto:shuaiwang.dev@gmail.com">
+          <i className="fa fa-envelope" />
+          </a>
+
         </SocialIcon>
       </FooterSocial>
       <Copyright>

@@ -5,12 +5,6 @@ import { motion } from 'framer-motion';
 import { device } from 'shared/theme';
 
 const IMusic = ({ match }) => {
-  // audio source
-  const streamUrl = 'https://soundcloud.com/aspirin-wang/deepbasschill';
-
-  // some track meta information
-  const trackTitle = 'Great song by random artist';
-
   return (
     <ProjectContainer
       initial="initial"

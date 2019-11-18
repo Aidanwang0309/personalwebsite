@@ -9,7 +9,7 @@ import from3 from 'assets/form3.png';
 import Carousel from 'assets/Carousel.gif';
 import crypt1 from 'assets/crypt1.png';
 import crypt2 from 'assets/crypt2.png';
-import { device } from 'shared/theme';
+
 
 const smallProjectsData = [
   {
