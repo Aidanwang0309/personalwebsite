@@ -1,1 +1,1 @@
-export { theme, darkTheme, device } from './theme.js';
+export { lightTheme, darkTheme, device } from './theme.js';

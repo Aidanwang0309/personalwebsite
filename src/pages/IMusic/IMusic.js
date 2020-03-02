@@ -15,6 +15,29 @@ const IMusic = ({ match }) => {
       <CreativeBlock word="Music" width={2} />
       <Container>
         <iframe
+          title="Chang An Song"
+          width="100%"
+          height="100%"
+          scrolling="no"
+          frameborder="no"
+          allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/767050642&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+        ></iframe>
+      </Container>
+      <Container2>
+        <iframe
+          title="Nowhere to go"
+          width="100%"
+          height="100%"
+          scrolling="no"
+          frameborder="no"
+          allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/759776812&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+        ></iframe>
+      </Container2>
+      <Container3>
+        <iframe
+          title="Tension of Self"
           width="100%"
           height="100%"
           scrolling="no"
@@ -22,19 +45,10 @@ const IMusic = ({ match }) => {
           allow="autoplay"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/709075834&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
         ></iframe>
-      </Container>
-      <Container2>
+      </Container3>
+      <Container4>
         <iframe
-          width="100%"
-          height="100%"
-          scrolling="no"
-          frameborder="no"
-          allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/513559578&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-        ></iframe>
-      </Container2>
-      <Container3>
-        <iframe
+          title="Maomao"
           width="100%"
           height="100%"
           scrolling="no"
@@ -42,7 +56,7 @@ const IMusic = ({ match }) => {
           allow="autoplay"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/578337633&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
         ></iframe>
-      </Container3>
+      </Container4>
     </ProjectContainer>
   );
 };
@@ -60,7 +74,8 @@ const ProjectContainer = styled(motion.div)`
     grid-template-areas:
       'g1 g1 '
       'g2 g2 '
-      'g3 g3';
+      'g3 g3'
+      'g4 g4';
   }
 
   @media ${device.tablet} {
@@ -72,7 +87,8 @@ const ProjectContainer = styled(motion.div)`
   @media ${device.laptop} {
     grid-template-areas:
       ' . g1'
-      'g2 g3';
+      'g2 g3'
+      'g4 .';
   }
 `;
 
@@ -85,6 +101,10 @@ const Container2 = styled.div`
 `;
 const Container3 = styled.div`
   grid-area: g3;
+`;
+
+const Container4 = styled.div`
+  grid-area: g4;
 `;
 
 // calc(33vw - 2.4rem)

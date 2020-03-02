@@ -32,7 +32,7 @@ const Footer = () => {
       <Copyright>
         <p>
           DESIGN <i style={{ color: '#ff4d3d' }} className="fa fa-heart"></i>{' '}
-          COPYRIGHT TO SHUAI WANG @ 2019
+          COPYRIGHT TO SHUAI WANG @ 2020
         </p>
       </Copyright>
     </FooterContainer>
@@ -119,10 +119,10 @@ const SocialIcon = styled.div`
   font-size: 28px;
   a {
     width: 33.3%;
+    transition: background-color 0.3s ease-in-out;
   }
   a:hover {
     background-color: #8080803d;
-    transition: background-color 0.3s ease-in-out;
   }
 `;
 

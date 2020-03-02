@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'shared/theme';
+import { lightTheme, darkTheme } from 'shared/theme';
 import * as routes from 'shared/constants/routes';
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
@@ -17,29 +17,31 @@ const ScrollToTop = () => {
   return null;
 };
 
-const DefaultContainer = () => {
-  return (
-    <Fragment>
-      <Header />
-      <Route component={ScrollToTop} />
-      <Route path={routes.CODE} component={ICode} />
-      <Route path={routes.DESIGN} component={IDesign} />
-      <Route exact path={routes.MUSIC} component={IMusic} />
-      <Footer />
-    </Fragment>
-  );
-};
+
 
 const App = () => {
+  const [isDark, setIsDark] = useState(false);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <Router>
         <Route
           render={() => (
             <AnimatePresence exitBeforeEnter>
               <Switch>
                 <Route exact path={routes.ROOT} component={Opening} />
-                <Route component={DefaultContainer} />
+                <Route component={() => {
+                  return (
+                    <Fragment>
+                      <Header idDark={isDark} onChangeTheme={() => setIsDark(!isDark)} />
+                      <Route component={ScrollToTop} />
+                      <Route path={routes.CODE} component={ICode} />
+                      <Route path={routes.DESIGN} component={IDesign} />
+                      <Route exact path={routes.MUSIC} component={IMusic} />
+                      <Footer />
+                    </Fragment>
+                  );
+                }} />
               </Switch>
             </AnimatePresence>
           )}
