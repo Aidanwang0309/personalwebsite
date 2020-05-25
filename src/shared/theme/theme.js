@@ -5,9 +5,9 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  backgroundPrimary: '#000000',
-  textPrimary: '#000000',
-  textSecondary: '#474747'
+  backgroundPrimary: '#202020',
+  textPrimary: '#c0c0c0',
+  textSecondary: '#474747',
 };
 
 const size = {

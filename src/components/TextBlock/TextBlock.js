@@ -13,20 +13,23 @@ const TextBlock = ({ title, description }) => {
 };
 
 const Container = styled(motion.div)`
-  width: 100vw;
+  width: calc(100%-100px);
   min-height: 20vh;
   display: grid;
   grid-template-rows: 1fr auto;
+  color:${(props) => props.theme.textPrimary};
 
   @media ${device.mobileS} {
     grid-template-columns: 1fr 10fr 1fr;
     margin-top: 50%;
     h2 {
       font-size: 1.2rem;
+      color:${(props) => props.theme.textPrimary};
     }
     p {
       font-size: 0.9rem;
       line-height: 2rem;
+      color:${(props) => props.theme.textPrimary};
     }
   }
   @media ${device.tablet} {
@@ -38,6 +41,7 @@ const Container = styled(motion.div)`
     p {
       font-size: 1.1rem;
       line-height: 2.5rem;
+      color:${(props) => props.theme.textPrimary};
     }
   }
   @media ${device.laptop} {
@@ -45,10 +49,13 @@ const Container = styled(motion.div)`
     grid-template-columns: 1fr 5fr 1fr;
     h2 {
       font-size: 1.7rem;
+      color:${(props) => props.theme.textPrimary};
     }
     p {
       font-size: 1.3rem;
       line-height: 3rem;
+      color:${(props) => props.theme.textPrimary};
+
     }
   }
 `;
@@ -59,6 +66,8 @@ const Subtitle = styled(motion.h2)`
   margin: 0;
   font-weight: 500;
   line-height: 1.5;
+  color:${(props) => props.theme.textPrimary};
+
 `;
 
 const Description = styled(motion.div)`

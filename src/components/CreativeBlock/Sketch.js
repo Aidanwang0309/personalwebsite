@@ -2,13 +2,13 @@ import fontfile from './Muli-Black.ttf';
 
 const Sketch = p => {
   let string = 'Code';
-  const size = 180;
-  let width = 3;
+  const size = 280;
+  let width = 2;
   // const fontFile = "Muli-Black.ttf";
   const showText = true;
-  const textAlpha = 1;
-  const backgroundColor = 255;
-  const strokeAlpha = 15;
+  // const textAlpha = 1;
+  const backgroundColor = '#ffffff00';
+  const strokeAlpha = 70;
   const strokeColor = 100;
 
   const fontSampleFactor = 0.3;
@@ -31,10 +31,10 @@ const Sketch = p => {
   };
 
   p.setup = () => {
-    p.createCanvas(p.windowWidth / width, p.windowWidth / 3.3);
+    p.createCanvas(p.windowWidth , p.windowHeight );
     p.background(backgroundColor);
     p.textSize(size);
-    p.fill(backgroundColor, textAlpha);
+    p.fill(backgroundColor);
     p.stroke(strokeColor, strokeAlpha);
     p.noiseDetail(noiseOctaves, noiseFalloff);
 

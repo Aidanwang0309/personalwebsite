@@ -34,22 +34,19 @@ const ICodeBlockData = [
   {
     id: 1,
     component: PartyAnimal,
-    title: 'Party Animal Manager',
-    categories: 'WEB UX/UI',
+    title: `Party Manager`,
+    categories: ['WEB', 'UX', 'UI'],
     image: party,
     link: 'party-animal',
-    size: 2,
-    position: 'middle',
     grid: 'g2'
   },
   {
     id: 2,
     component: SmallProjects,
-    title: 'Random Projects',
-    categories: 'WEB UX/UI',
+    title: 'Random',
+    categories: ['WEB', 'UX', 'UI'],
     image: random,
     link: 'random',
-    size: 2,
     grid: 'g3'
   },
   {
@@ -57,92 +54,80 @@ const ICodeBlockData = [
     component: Fluz,
     title: 'Fluz',
     image: fluz,
-    categories: 'WEB UX/UI',
+    categories: ['WEB', 'UX', 'UI'],
     link: 'fluz',
-    size: 1,
     grid: 'g4'
   },
   {
     id: 4,
     component: CreativeCoding,
-    title: 'CREATIVE CODING',
-    categories: 'WEB / UX/UI / Design ',
+    title: 'CREATIVE',
+    categories: ['WEB', 'UX', 'UI', 'DESIGN'],
     image: creative,
     link: 'creative-coding',
-    size: 1,
-    position: 'middle',
     grid: 'g5'
   },
   {
     id: 5,
     component: DailyOrange,
-    title: 'DAILY ORANGE BASKET BALL',
-    categories: 'WEB UX/UI',
+    title: 'DO BASKETBALL',
+    categories: ['WEB', 'UX', 'UI'],
     image: daily,
     link: 'daily-orange',
-    size: 2,
-    position: 'middle',
     grid: 'g6'
   },
   {
     id: 6,
     component: NYCParkCrime,
-    title: 'NYC PARK CRIME DATAV',
-    categories: 'WEB / UX/UI / DATA',
+    title: 'NYC PC DATAV',
+    categories: ['WEB', 'UX', 'UI', 'DATA'],
     image: park,
     link: 'park-crime-datav',
-    size: 2,
     grid: 'g7'
   },
   {
     id: 7,
     component: VJ,
-    title: 'AUDIO REACTIVE VJ',
+    title: 'VJ',
     image: vj,
-    categories: 'Design / AUDIO',
+    categories: ['DESIGN', 'AUDIO'],
     link: 'vj',
-    size: 1,
     grid: 'g8'
   },
   {
     id: 8,
     component: ImageCollage,
-    title: 'IMAGE COLLAGE',
+    title: 'I-COLLAGE',
     image: collage,
     link: 'image-collage',
-    categories: 'Design',
-    size: 1,
-    position: 'middle',
+    categories: ['DESIGN', 'WEB'],
     grid: 'g9'
   },
   {
     id: 9,
     component: Marvin,
-    title: 'MARVIN BILLING SYSTEM',
-    categories: 'WEB / UX/UI / DATA',
+    title: 'MARVIN',
+    categories: ['WEB', 'UX', 'UI', 'DATA'],
     image: marvin,
     link: 'marvin-billing-system',
-    size: 2,
     grid: 'g10'
   },
   {
     id: 10,
     component: Tension,
-    title: 'TENSION OF SELF',
-    categories: 'VR / MUSIC / DANCE',
+    title: 'T0S VR',
+    categories: ['VR', 'MUSIC', 'DANCE'],
     image: tension,
     link: 'tension-of-self',
-    size: 2,
     grid: 'g11'
   },
   {
     id: 11,
     component: APMotion,
     title: 'AP DATAV',
-    categories: 'WEB / MOTION CAPTURE / DATA ',
+    categories: ['WEB', 'MOTION-CAPTURE', 'DATA'],
     image: motionpic,
     link: 'ap-motion',
-    size: 1,
     grid: 'g12'
   }
 ];
@@ -165,8 +150,6 @@ const ICode = () => {
             title={title}
             img={image}
             link={`${match.url}/${link}`}
-            size={size}
-            position={position}
             grid={grid}
             categories={categories}
           />
@@ -194,50 +177,70 @@ const ICodeRouter = () => {
 };
 
 const ProjectContainer = styled(motion.div)`
+  z-index:99;
   position: relative;
-  transform: translateY(162px);
+  margin-left:100px;
   height: auto;
-  width: 100%;
+  width: calc(100%-100px);
   display: grid;
 
+  
   @media ${device.mobileS} {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(6, calc(40vw - 0.1rem));
+    top:70px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(12, calc(60vw - 0.1rem));
     grid-template-areas:
-      'g2 g6'
-      'g5 g8'
-      'g3 g3'
-      'g7 g7'
-      'g9 g4'
-      'g10 g10'
-      'g11 g11'
-      'g12 .';
+      '. g2 g2 g2'
+      '. g3 g3 g3'
+      '. g4 g4 g4'
+      '. g5 g5 g5'
+      '. g6 g6 g6'
+      '. g7 g7 g7'
+      '. g8 g8 g8'
+      '. g9 g9 g9'
+      '. g10 g10 g10'
+      '. g11 g11 g11'
+      '. g12 g12 g12';
   }
 
   @media ${device.tablet} {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(6, calc(33vw - 2.4rem));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(12, calc(50vw - 2.4rem));
     grid-template-areas:
-      'g2 g2 g4'
-      'g5 g3 g3'
-      'g6 g6 g8'
-      'g9 g7 g7'
-      'g10 g10 g12'
-      'g11 g11 .';
+      '. g2 g2 g2'
+      '. g3 g3 g3'
+      '. g4 g4 g4'
+      '. g5 g5 g5'
+      '. g6 g6 g6'
+      '. g7 g7 g7'
+      '. g8 g8 g8'
+      '. g9 g9 g9'
+      '. g10 g10 g10'
+      '. g11 g11 g11'
+      '. g12 g12 g12';
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
   }
 
   @media ${device.laptop} {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(6, calc(33vw - 2.4rem));
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-rows: repeat(12, calc(40vw - 2.4rem));
     grid-template-areas:
-      'g1 g2 g2'
-      'g3 g3 g4'
-      'g5 g6 g6'
-      'g7 g7 g8'
-      'g9 g10 g10'
-      'g11 g11 g12';
+      '. . g2 g2 g2 .'
+      '. . g3 g3 g3 .'
+      '. . g4 g4 g4 .'
+      '. . g5 g5 g5 .'
+      '. . g6 g6 g6 .'
+      '. . g7 g7 g7 .'
+      '. . g8 g8 g8 .'
+      '. . g9 g9 g9 .'
+      '. . g10 g10 g10 .'
+      '. . g11 g11 g11 .'
+      '. . g12 g12 g12 .';
+  background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+  background-size: 16.7% 100px;
   }
 `;
-
-// calc(33vw - 2.4rem)
 export default ICodeRouter;

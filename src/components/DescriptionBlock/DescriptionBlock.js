@@ -134,12 +134,13 @@ const DescriptionBlock = ({
 };
 
 const Container = styled(motion.div)`
+  ${'' /* background-color: ${props => props.theme.backgroundPrimary}; */}
+  color:${(props) => props.theme.textPrimary};
   z-index: 9;
   position: relative;
-  top: 160px;
-  width: 100vw;
+  top: 3rem;
+  width: calc(100%-100px);
   min-height: 80vh;
-  ${'' /* transform:translateY(160px); */}
   display:grid;
   grid-template-areas:
     '. title . '
@@ -180,15 +181,16 @@ const Title = styled(motion.h1)`
   align-self: end;
   margin: 0;
   font-weight: 500;
-
   line-height: 1.5;
+  color:${(props) => props.theme.textPrimary};
+
 `;
 
 const Description = styled(motion.div)`
   grid-area: content;
   line-height: 3rem;
   font-weight: 400;
-  color: ${props => props.theme.textSecondary};
+  color:${(props) => props.theme.textPrimary};
 `;
 
 const Category = styled(motion.div)`
@@ -197,6 +199,7 @@ const Category = styled(motion.div)`
   margin: 10px 70px 15px 0;
   width: auto;
   font-size: 0.9rem;
+  color:${(props) => props.theme.textPrimary};
   &:nth-of-type(1) {
     display: block;
     margin: 40px 70px 0 0;
@@ -212,7 +215,7 @@ const Category = styled(motion.div)`
 const ProjectLink = styled.a`
   margin-right: 15%;
   position: relative;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
   display: inline-block;
   font-size: 0.7rem;
   text-decoration: none;

@@ -6,13 +6,14 @@ import { motion } from 'framer-motion';
 import { thumbnailVariants } from 'shared/animation';
 import Media from 'react-media';
 
-const CreativeBlock = ({ word, width }) => {
+const CreativeBlock = ({ word, width, grid }) => {
   return (
     <CreativeContainer
       initial="initial"
       animate="enter"
       exit="exit"
       variants={thumbnailVariants}
+      grid={grid}
     >
       <Media query={{ minWidth: 1024 }}>
         {matches =>
@@ -24,8 +25,11 @@ const CreativeBlock = ({ word, width }) => {
 };
 
 const CreativeContainer = styled(motion.div)`
-  display: flex;
-  justify-content: start;
+  ${'' /* position: relative; */}
+  ${'' /* grid-area: ${props => `${props.grid}`}; */}
+  ${'' /* display: flex;
+  justify-content: start; */}
+  z-index:1;
   position: fixed;
 `;
 

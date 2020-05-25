@@ -15,7 +15,7 @@ const TextBlockWithPic = ({ title, description, image }) => {
 const Container = styled(motion.div)`
     transform:translateY(45%);
     margin-top:5%;
-    width:100vw
+    width: calc(100%-100px);
     min-height:20vh
     display:grid;
     grid-template-columns: 1fr 3fr 2fr 1fr;

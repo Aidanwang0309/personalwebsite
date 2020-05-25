@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { device } from 'shared/theme';
 
 const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] };
+
 const imageTransition = {
   duration: 3,
   ease: "easeInOut",
@@ -23,45 +24,41 @@ const thumbnailVariants = {
   }
 };
 
-const TextVariants1 = {
+const BackgroundTextVariants = {
   active: {
-    y: 20,
-    opacity: 1,
-    scale:1,
-    transition: { duration: 0.7 }
-  },
-  inactive: {
-    y: 50,
-    opacity: 0,
-    scale:0.7,
-    transition: { duration: 0.7 }
-  }
-}
-
-const TextVariants2 = {
-  active: {
-    y: 0,
-    opacity: 1,
-    scale:1,
     transition: { duration: 0.85 }
   },
   inactive: {
-    y: 50,
-    opacity: 0,
-    scale:0.7,
-    transition: { duration: 0.85}
+    transition: { duration: 0.85 }
   }
 }
 
+const LetterVariants = {
+  active: {
+    x: 0,
+    y: -15,
+    opacity: 1,
+    transition: { duration: 0.85 }
+  },
+  inactive: {
+    x: -30,
+    y: -15,
+    opacity: 1,
+    transition: { duration: 0.85 }
+  }
+}
 
 
 const imageVariants = {
   active: {
-    scale: [0.75, 0.8, 0.75],
+    scale: [0.95, 1, 0.95],
     transition: imageTransition,
+    opacity: [0.6, 0.8, 0.6],
   },
+
   inactive: {
-    scale: 1,
+    scale: 0.8,
+    opacity: 0,
     transition: {
       duration: 0.5,
       ease: "easeInOut",
@@ -69,40 +66,9 @@ const imageVariants = {
   },
 }
 
-const colorBlockVariants = {
-  active: {
-    scale:1,
-    opacity:1,
-    transition: {
-      duration: 0.85,
-      ease: "easeInOut",
-    },
-  },
-  inactive: {
-    scale:0.7,
-    opacity:0,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  },
-}
-const colors = [
-  'D8E2DC',
-  'FFE5D9',
-  'B2DBBF',
-  '70C1B3',
-  'FFCAD4',
-  '396362',
-  '4b8e8d',
-  'F4ACB7',
-  '247BA0',
-  '745c97',
-  '8186d5',
-  '00bfa5'
-];
 
-const Block = ({ id, title, categories, img, position, link, grid }) => {
+
+const Block = ({ id, title, categories, img, link, grid }) => {
 
   const [active, setActive] = useState(false);
 
@@ -114,22 +80,38 @@ const Block = ({ id, title, categories, img, position, link, grid }) => {
     setActive(false);
   }
 
-
   return (
     <BlockContainer variants={thumbnailVariants} grid={grid} onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
       <BlockLink to={link}>
-        <Avatar isMiddle={position === 'middle'}>
-          {img && <motion.img src={img} variants={imageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
-          <TextContainer color={colors[id]}>
-            <OverlayColorBlock color={colors[id]} variants={colorBlockVariants} animate={active ? 'active' : 'inactive'} />
-            <OverlayText className="overlayText" variants={TextVariants1} animate={active ? 'active' : 'inactive'}>
-              <h1> {title} </h1>
+
+        <BackgroundText
+          variants={BackgroundTextVariants}
+          animate={active ? 'active' : 'inactive'}
+        >
+          <div style={{ width: '100%' }}>
+            {[...title].map(letter =>
+              <div style={{ display: 'inline-block', overflow: 'hidden' }}>
+                <motion.span className="overlayLetter" variants={LetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
+              </div>)}
+            <OverlayText>
+              {categories.map(category => <span> {category} </span>)}
             </OverlayText>
-            <OverlayText className="overlayText" variants={TextVariants2} animate={active ? 'active' : 'inactive'} >
-              <p> {categories} </p>
+          </div>
+        </BackgroundText>
+
+        <Avatar>
+          {img && <motion.img src={img} variants={imageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
+          <TextContainer>
+            <OverlayText>
+              <div style={{ width: '100%' }}>{[...title].map(letter =>
+                <div style={{ display: 'inline-block', overflow: 'hidden' }}>
+                  <motion.span className="overlayLetter" variants={LetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
+                </div>)}
+              </div>
             </OverlayText>
           </TextContainer>
         </Avatar>
+
       </BlockLink>
     </BlockContainer>
   );
@@ -137,41 +119,33 @@ const Block = ({ id, title, categories, img, position, link, grid }) => {
 
 
 const BlockContainer = styled(motion.div)`
+  z-index:99;
   position: relative;
   grid-area: ${props => `${props.grid}`};
-  border: 0.1px solid #e4e4e4;
+  padding:1px;
+  padding-top: 10%;
+  border-bottom: none;
 `;
 
 const TextContainer = styled.div`
   position:absolute;
-  left:5%;
+  left:0;
   bottom:0;
   display:flex;
   flex-direction:column;
   text-align:left;
-  width:95%;
+  width:100%;
   h1{
     margin-top:0;
-    color:white;
-    text-shadow:${props => `3px -3px 4px #${props.color}`};
-    ${'' /* color:${props => `#${props.color}`}; */}
+    color:${props => `#${props.color}`};
   }
   p{
     margin-top:0;
     color:white;
-    text-shadow:${props => `3px -3px 4px #${props.color}`};
   }
 `
 
-const OverlayColorBlock =  styled(motion.div)`
-  position:absolute;
-  bottom:40%;
-  left:-5%;
-  width:90%;
-  height:40%;
-  box-shadow:14px 16px 28px -11px rgba(0,0,0,0.51);
-  background-color:${props => `#${props.color}7F`};
-`
+
 const BlockLink = styled(Link)`
   width: 100%;
   height: 100%;
@@ -188,54 +162,79 @@ const Avatar = styled.div`
   align-items: center;
   color: white;
   transition: all 0.2s ease-in;
-
-  ${'' /* background: transparent;
-  &:hover {
-    transition: background 0.2s ease-in;
-    background: ${props => `#${props.color}`};
-  } */}
-
   img {
     transform-style: preserve-3d;
     position: absolute;
     transition: all 0.2s linear;
-    width: ${props => (props.isMiddle ? `auto` : `100%`)};
-    height: ${props => (props.isMiddle ? `calc(33vw - 7rem)` : `100%`)};
+    left:0;
+    top:0;
+    width:100%;
+    opacity:0;
+
   }
 
   @media ${device.mobileS} {
     img {
-      height: ${props => (props.isMiddle ? `calc(33vw - 3rem)` : `100%`)};
+      height:(100% -10vh);
     }
   }
 `;
 
 const OverlayText = styled(motion.div)`
-
-  ${'' /* opacity:0; */}
+  width:100%;
   @media ${device.mobileS} {
-    h1 {
-      font-size: calc(1.6rem + 0.35vw);
-    }
-    p {
-      font-size: calc(1rem + 0.55vw);
+    span {
+      padding-left: 0.3rem;
+      font-size: calc(0.3rem + 0.55vw);
       font-weight: 300;
+    }
+    div {
+      margin: 0;
+      span {
+      font-size: calc(1.3rem + 0.65vw);
+      font-weight: 300;
+      display:inline-block;
+    }
     }
     line-height: calc(1.6rem + 0.35vw);
   }
 
   @media ${device.tablet} {
     z-index: 9;
-    h1 {
-      font-size: calc(2.6rem + 0.55vw);
-    }
-    p {
-      font-size: calc(2rem + 0.35vw);
+    span {
+      padding-left: 0.3rem;
+      font-size: calc(1rem + 0.35vw);
       font-weight: 300;
     }
-    line-height: calc(2.6rem + 0.75vw);
+    div {
+      margin: 0;
+      font-size: calc(2rem + 5vw);
+      span {
+      font-size: calc(1.3rem + 0.65vw);
+      font-weight: 300;
+      display:inline-block;
+
+    }
+    }
   }
 `;
+
+const BackgroundText = styled(motion.div)`
+  position:absolute;
+  left:-10vw;
+  bottom:25%;
+  color: #90909040;
+  z-index:999;
+  
+  @media ${device.mobileS} {
+    font-size:calc(1rem + 5vw);
+  }
+
+  @media ${device.tablet} {
+    font-size:calc(2rem + 5vw);
+  }
+`;
+
 
 Block.defaultProps = {
   title: 'project',
@@ -254,3 +253,19 @@ Block.propTypes = {
 };
 
 export default Block;
+
+
+// const colors = [
+//   'D8E2DC',
+//   'FFE5D9',
+//   'B2DBBF',
+//   '70C1B3',
+//   'FFCAD4',
+//   '396362',
+//   '4b8e8d',
+//   'F4ACB7',
+//   '247BA0',
+//   '745c97',
+//   '8186d5',
+//   '00bfa5'
+// ];

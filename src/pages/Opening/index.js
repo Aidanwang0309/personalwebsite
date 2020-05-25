@@ -1,1 +1,1 @@
-export { default as Opening } from './Opening';
+export { default as Opening } from './NewOpening';

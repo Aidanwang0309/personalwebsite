@@ -9,6 +9,9 @@ import {
 } from 'postprocessing';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { device } from 'shared/theme';
+import css from "./styles.module.scss"
+
 
 class Opening extends Component {
   state = {
@@ -65,7 +68,12 @@ class Opening extends Component {
     this.renderer.autoClear = false;
     this.renderer.setClearColor(0x000000, 0.0);
     this.el.appendChild(this.renderer.domElement);
+
   };
+
+  // createAudioListener = () => {
+
+  // }
 
   createParticles = () => {
     this.particle = new THREE.Object3D();
@@ -91,6 +99,17 @@ class Opening extends Component {
   };
 
   createPlanet = () => {
+    // this.listener = new THREE.AudioListener();
+    // this.camera.add(this.listener);
+
+    // this.sound = new THREE.PositionalAudio(this.listener);
+    // this.audioLoader = new THREE.AudioLoader();
+    // this.audioLoader.load("./bg.ogg", function (buffer) {
+    //   this.sound.setBuffer(buffer);
+    //   this.sound.setRefDistance(20);
+    //   this.sound.play();
+    // });
+
     this.circle = new THREE.Object3D();
     let geom = new THREE.IcosahedronGeometry(7, 1);
     let mat = new THREE.MeshPhongMaterial({
@@ -101,6 +120,10 @@ class Opening extends Component {
     this.planet.scale.x = this.planet.scale.y = this.planet.scale.z = 16;
     this.circle.add(this.planet);
     this.scene.add(this.circle);
+    // this.createAudioListener();
+
+
+    // this.circle.add(this.sound)
   };
 
   createPlanetOutline = () => {
@@ -139,8 +162,8 @@ class Opening extends Component {
 
     //PASSES
     const bloomEffect = new BloomEffect();
-    bloomEffect.blendMode.opacity.value = 8.0;
-    bloomEffect.setResolutionScale(0.3);
+    bloomEffect.blendMode.opacity.value = 5.0;
+    bloomEffect.setResolutionScale(0.5);
     const effectPass = new EffectPass(this.camera, bloomEffect);
     effectPass.renderToScreen = true;
 
@@ -201,51 +224,120 @@ class Opening extends Component {
         variants={{ exit: { transition: { staggerChildren: 0.01 } } }}
       >
         {loadingAnimation}
-        <div className="hero-container" style={{ background: 'black' }}>
+        <div className={css.hero}>
           <div
-            className="hero-bg"
+            className={css['hero-info']}
             ref={ref => {
               this.el = ref;
             }}
           >
-            <Container>
+            {/* <Container>
               <NavLink to="/icode">ENTER</NavLink>
-            </Container>
+            </Container> */}
+            <div className={css['hero-info-content']}>
+              <IntroContainer>
+                <h2>
+                  HI, I'm Shuai Wang. I'm a
+                </h2>
+              </IntroContainer>
+              <IntroContainer>
+                <NavLink to="/icode">Developer</NavLink>
+                <span> <i></i> </span>
+              </IntroContainer>
+              <IntroContainer>
+                <NavLink to="/imusic">DJ</NavLink>
+                <span> <i></i> </span>
+              </IntroContainer>
+              <IntroContainer>
+                <NavLink to="/imusic">Music Producer</NavLink>
+                <span> <i></i> </span>
+              </IntroContainer>
+              <IntroContainer>
+                <NavLink to="/idesign">UI/UX Designer</NavLink>
+                <span> <i></i> </span>
+              </IntroContainer>
+            </div>
           </div>
         </div>
       </ProjectContainer>
     );
   }
 }
-const ProjectContainer = styled(motion.div)``;
 
-const Container = styled(motion.div)`
-  position: absolute;
-  right: 20%;
-  bottom: 20%;
+const ProjectContainer = styled(motion.div)`
+
 `;
+
+
+const IntroContainer = styled(motion.div)`
+  margin-bottom:1rem;
+  padding: 15px 25px;
+  border-radius: 5px;
+  background: #202020;
+  box-shadow: -5px -5px 15px #333333,
+              5px 5px 15px #0d0d0d;
+  cursor:pointer;
+
+  h2{
+    font-size:1rem; 
+    color:#d0d0d0;
+  }
+
+  :hover {
+    a{
+      transform:translateX(20px)
+      -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+      -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+      animation: neon2 1.5s ease-in-out infinite alternate;
+    }
+
+  }
+  @keyframes neon2 {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
+          0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+      }
+      to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
+          0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+      }
+    }
+
+  @media ${device.mobileS} {
+    margin-bottom:2rem;
+
+    h2{
+      font-size:1.5rem; 
+    }
+  }
+`
+
+// const Container = styled(motion.div)`
+//   position: absolute;
+//   right: 20%;
+//   bottom: 20%;
+//   padding: 15px 25px;
+//   border-radius: 5px;
+//   background: #202020;
+//   box-shadow: -5px -5px 15px #333333,
+//               5px 5px 15px #0d0d0d;
+
+
+
+
+// `;
 
 const NavLink = styled(Link)`
   height: 100%;
   width: 100%;
-  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-  animation: neon2 1.5s ease-in-out infinite alternate;
-  @keyframes neon2 {
-    from {
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
-        0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
-    }
-    to {
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
-        0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
-    }
-  }
   text-decoration: none;
-  font-size: 5rem;
-  color: white;
-  font-weight: 700;
-  :hover {
-  }
+  font-size: 2rem;
+  color: #d0d0d0;
+  font-weight: 500;
+  transition:all ease-in-out 0.3s;
+
 `;
+
 export default Opening;
+
+
