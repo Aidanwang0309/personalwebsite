@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { DescriptionBlock } from 'components/DescriptionBlock';
 import { motion } from 'framer-motion';
 import law from 'assets/lawmanager.png';
+import { device } from 'shared/theme';
 
 const Law = () => {
   return (
@@ -29,6 +30,23 @@ const Law = () => {
 const Container = styled(motion.div)`
   position: relative;
   height: auto;
+  @media ${device.mobileS} {
+    ${'' /* margin-left:0px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
 `;
 
 const ImageContainer = styled.div`

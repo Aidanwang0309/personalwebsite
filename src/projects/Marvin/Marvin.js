@@ -5,10 +5,11 @@ import { motion } from 'framer-motion';
 import { transition, imageVariants } from 'shared/animation';
 import { TextBlock } from 'components/TextBlock';
 import { VideoBlock } from 'components/VideoBlock';
+import { device } from 'shared/theme';
 
 const Marvin = () => {
   return (
-    <motion.div
+    <MarvinContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -32,7 +33,7 @@ I take the responsibility to build the front end based on the prototype and disc
       <Container>
         <VideoBlock youtubeId="2y6z575UV68" />
       </Container>
-    </motion.div>
+    </MarvinContainer>
   );
 };
 
@@ -41,11 +42,30 @@ const Image = styled(motion.img)`
   width: 70%;
 `;
 
+const MarvinContainer = styled.div`
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
+
+
 const Container = styled.div`
-  transform: translateY(30%);
-  margin-bottom: 15%;
+  padding-bottom: 15%;
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   .video {
     margin-top: 3rem;
     grid-column-start: 2;

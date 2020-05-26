@@ -32,6 +32,8 @@ const Subtitle = styled(motion.h2)`
   font-weight: 500;
   font-size: 1.7rem;
   line-height: 1.5;
+  color:${(props) => props.theme.textPrimary};
+
 `;
 
 const Description = styled(motion.div)`
@@ -43,7 +45,7 @@ const Description = styled(motion.div)`
   p {
     font-size: 1.1rem;
   }
-  color: ${props => props.theme.textSecondary};
+  color:${(props) => props.theme.textPrimary};
 `;
 
 const Image = styled(motion.img)`

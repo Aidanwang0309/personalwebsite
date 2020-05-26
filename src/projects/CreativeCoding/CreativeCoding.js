@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import P5Wrapper from 'react-p5-wrapper';
 import sketch from './NoiseSketch';
 import star from './StarSketch';
+import { device } from 'shared/theme';
+
+
 const CreativeCoding = () => {
   return (
-    <motion.div
+    <CreativeContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -23,18 +26,51 @@ const CreativeCoding = () => {
         plink="HTTPS://MARVIN.MONOMICHAEL.COM"
       />
       {/* <Image variants={imageVariants} src={daily1} /> */}
-      <CanvaContainer>
-        <P5Wrapper sketch={sketch} />
-      </CanvaContainer>
-      <CanvaContainer>
-        <P5Wrapper sketch={star} />
-      </CanvaContainer>
-    </motion.div>
+      <Container>
+        <CanvasContainer>
+          <P5Wrapper sketch={sketch} />
+        </CanvasContainer>
+        <CanvasContainer>
+          <P5Wrapper sketch={star} />
+        </CanvasContainer>
+      </Container>
+    </CreativeContainer>
   );
 };
 
-const CanvaContainer = styled.div`
-  transform: translateY(30%);
+const CanvasContainer = styled.div`
+  @media ${device.mobileS} {
+    margin-top:100px;
+
+  }
+  @media ${device.tablet} {
+    margin-left:-100px;
+  }
+
 `;
+
+const Container = styled.div`
+
+`
+
+const CreativeContainer = styled.div`
+
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
 
 export default CreativeCoding;

@@ -9,6 +9,7 @@ import from3 from 'assets/form3.png';
 import Carousel from 'assets/Carousel.gif';
 import crypt1 from 'assets/crypt1.png';
 import crypt2 from 'assets/crypt2.png';
+import { device } from 'shared/theme';
 
 
 const smallProjectsData = [
@@ -20,6 +21,7 @@ const smallProjectsData = [
     stack: ' React | Node.js | ANTD ',
     platform: ' Web/Mobile',
     category: 'Web/Design',
+    creator: 'Shuai Wang',
     plink: 'HTTPS://PACIFIC-BRUSHLANDS-50507.HEROKUAPP.COM',
     glink: 'HTTPS://GITHUB.COM/AIDANWANG0309/TOPVIEWTEST',
     images: [
@@ -57,7 +59,7 @@ const smallProjectsData = [
 
 const SmallProjects = () => {
   return (
-    <motion.div
+    <SmallContainer
       style={{ height: 'auto' }}
       initial="exit"
       animate="enter"
@@ -78,22 +80,53 @@ const SmallProjects = () => {
               glink={p.glink}
             />
             <Container>
-              {p.images && <Slides images={p.images} />}
-              {p.image && <Image src={p.image} />}
+              <div style={{ gridColumnStart: 2 }}>
+                {p.images && <Slides images={p.images} />}
+                {p.image && <Image src={p.image} />}
+              </div>
             </Container>
           </div>
         );
       })}
-    </motion.div>
+    </SmallContainer>
   );
 };
 
+const SmallContainer = styled.div`
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
+
 const Container = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  display: grid;
 
-  margin-top: 220px;
+  @media ${device.mobileS} {
+    margin-top: 20vh;
+  }
+  @media ${device.tablet} {
+
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+    margin-top: 0;
+  }
 `;
 
 const Image = styled(motion.img)`

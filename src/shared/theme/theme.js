@@ -8,6 +8,7 @@ export const darkTheme = {
   backgroundPrimary: '#202020',
   textPrimary: '#c0c0c0',
   textSecondary: '#474747',
+  textLink:'#21efe5',
 };
 
 const size = {

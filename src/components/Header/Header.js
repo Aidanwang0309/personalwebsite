@@ -72,7 +72,7 @@ const logoVariants = {
     transition: {
       duration: 1,
     },
-    x: -5,
+    y: -5,
   },
   exit: {
     opacity: 0,
@@ -83,24 +83,7 @@ const logoVariants = {
   },
   initial: {
     opacity: 0,
-    x: -30,
-  },
-}
-const navItemVariants = {
-  enter: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 2,
-    },
-  },
-  initial: {
-    opacity: 0,
+    y: -30,
   },
 }
 
@@ -229,7 +212,7 @@ const Header = ({ isDark, onChangeTheme }) => {
       <Nav initial={false} exit='exit' animate={isOpen ? 'open' : 'closed'} ref={containerRef}>
         <NavList navList={navList} isOpen={isOpen} />
         <NavBg className='background' variants={sidebar}>
-          {/* <Particles></Particles> */}
+          <Particles></Particles>
         </NavBg>
         <NavButton toggle={() => handleToggle()} onClick={handleToggle} />
       </Nav>
@@ -263,7 +246,7 @@ const NavBg = styled(motion.div)`
   background: ${(props) => props.theme.backgroundPrimary};
 
   @media ${device.mobileS} {
-    top: 70px;
+    top: 20vw;
     left: 0px;
   }
 
@@ -282,9 +265,11 @@ const NavContainer = styled.section`
   justify-content: space-between;
   background-color: ${(props) => props.theme.backgroundPrimary};
   border-right: ${(props) => `1px solid ${props.theme.textPrimary}`};
+  align-items:center;
+  align-content:center;
 
   @media ${device.mobileS} {
-    height:69px;
+    height:20vw;
     flex-direction: row;
     width:100%;
     border-bottom:1px solid #ffffff40;
@@ -306,34 +291,49 @@ const Nav = styled(motion.nav)`
 
   @media ${device.mobileS} {
     position: fixed;
-    width:70px;
-    height:70px;
+    width:20%;
+    height:20vw;
     border-left:1px solid #ffffff40;
     right:0;
     top:0;
 
     ul{
       height:40%;
+      left:0;
       li{
-        font-size:10vw;
+        margin-bottom:1vh;
+        border-bottom:1px solid #ffffff40;
+        line-height:8vh;
+        a{
+          font-size:10vw;
+        }
       }
     }
     button{
       position:absolute;
       padding:0;
-      right:15px;
-      top:15px;
+      right:5vw;
+      top:5vw;
       width:40px;
       height:40px;
     }
   }
 
   @media ${device.tablet} {
+    border-left:0px;
     position: relative;
+    top:-125px;
+    ul{
+      left:10vw;
+      top:25%;
+      li{
+        margin-bottom:7vh;
+      }
+    }
     button{
       position:absolute;
-      right:15px;
-      top:15px;
+      right:-10px;
+      top:0;
     }
   }
 `
@@ -343,28 +343,33 @@ const Logo = styled(motion.div)`
   height: 60px;
   line-height: 1.5rem;
   text-align: left;
-    
+  border-right: 1px solid #ffffff40;
+
 
   @media ${device.mobileS} {
     position:absolute;
     left:0;
     top:0;
-    width:70px;
-    height:70px;
+    width:20%;
+    height:20vw;
     border-right: 1px solid #ffffff40;
     svg{
       width:40px;
       height:40px;
-      padding:15px;
+      padding:5vw;
     }
   }
 
   @media ${device.tablet} {
     position: relative;
-    width: 3.5vw;
+    width: 5vw;
     padding: 1rem;
     left:0;
     top:0;
+    border-right: 0px;
+    svg{
+      padding:10px;
+    }
   }
 `
 
@@ -421,12 +426,15 @@ const LogoText = styled(motion.div)`
     }
     @media ${device.mobileS} {
       position:fixed;
-      top:15px;
+      top:6vw;
+      left:0;
       width:30%;
       height:150px;
       transform: rotate(90deg);
     }
     @media ${device.tablet} {
+      top:-320px;
+      left:10px;
       width: 100px;
       height: 400px;
       padding-bottom: 2rem;

@@ -46,7 +46,7 @@ const Container = styled(motion.div)`
   }
   @media ${device.laptop} {
     margin-top: 20%;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 4fr 1fr;
     h2 {
       font-size: 1.7rem;
       color:${(props) => props.theme.textPrimary};
@@ -75,7 +75,22 @@ const Description = styled(motion.div)`
   grid-row-start: 2;
   padding-top: 5%;
   font-weight: 400;
-  color: ${props => props.theme.textSecondary};
+
+  @media ${device.mobileS} {
+      font-size: 0.9rem;
+      line-height: 2rem;
+      color:${(props) => props.theme.textPrimary};
+  }
+  @media ${device.tablet} {
+      font-size: 1.1rem;
+      line-height: 2.5rem;
+      color:${(props) => props.theme.textPrimary};
+  }
+  @media ${device.laptop} {
+      font-size: 1.3rem;
+      line-height: 3rem;
+      color:${(props) => props.theme.textPrimary};
+  }
 `;
 
 export default TextBlock;

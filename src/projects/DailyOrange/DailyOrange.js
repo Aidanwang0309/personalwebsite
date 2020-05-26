@@ -24,15 +24,14 @@ const imageVariants2 = {
   exit: { opacity: 0, scale: 0.5, transition },
   enter: {
     opacity: 1,
-    scale: 1.3,
-    skew: 10,
+    scale: 1,
     transition
   }
 };
 
 const DailyOrange = () => {
   return (
-    <Container
+    <DailyContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -50,57 +49,86 @@ const DailyOrange = () => {
         plink="HTTP://DAILYORANGE.COM/2016/11/BASKETBALL-GUIDE-2016"
       />
       <Container>
-        <Image variants={imageVariants} src={daily1} />
-        <Image2 variants={imageVariants2} src={daily2} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Image variants={imageVariants} src={daily1} />
+        </div>
       </Container>
-    </Container>
+      <Container>
+        <div style={{ gridColumnStart: 2 }}>
+          <Image2 variants={imageVariants2} src={daily2} />
+        </div>
+      </Container>
+    </DailyContainer>
   );
 };
 
+const DailyContainer = styled(motion.div)`
+  position: relative;
+
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`;
+
 const Container = styled(motion.div)`
   position: relative;
+  display: grid;
+
+  @media ${device.mobileS} {
+    top: 150px;
+  }
+  @media ${device.tablet} {
+    top: 0px;
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
+
 `;
 
 const Image = styled(motion.img)`
-  position: absolute;
 
   @media ${device.mobileS} {
-    width: 80%;
-    top: 45%;
-    left: 20%;
+    width: 100%;
+
   }
   @media ${device.tablet} {
-    width: 70%;
-    right: 0px;
-    top: -150px;
+    width: 100%;
+
   }
   @media ${device.laptop} {
-    width: 60%;
-    left: 40%;
-    top: -139px;
+    width: 100%;
+
   }
 `;
 
 const Image2 = styled(motion.img)`
   position: relative;
-  z-index: -1;
+  width: 100%;
+
   @media ${device.mobileS} {
-    padding: 5rem 0;
-    width: 68%;
-    bottom: -200px;
-    left: 50px;
+    margin-bottom:10vh;
   }
   @media ${device.tablet} {
-    padding: 3rem 0;
-    width: 60%;
-    left: 27%;
-    bottom: -80px;
+
   }
 
   @media ${device.laptop} {
-    width: 60%;
-    left: 23%;
-    bottom: -139px;
+    bottom: 0;
+    width: 100%;
   }
 `;
 

@@ -15,7 +15,7 @@ import { Marvin } from 'projects/Marvin';
 import { Tension } from 'projects/Tension';
 import { APMotion } from 'projects/APMotion';
 
-import daily from 'assets/dailyorangebs.gif';
+import daily from 'assets/daily.png';
 import park from 'assets/park.png';
 import creative from 'assets/creative.gif';
 import marvin from 'assets/marvin.png';
@@ -23,7 +23,7 @@ import motionpic from 'assets/motion.png';
 import random from 'assets/random.png';
 import collage from 'assets/collage.gif';
 import tension from 'assets/tension.png';
-import party from 'assets/party.gif';
+import party from 'assets/party.png';
 import vj from 'assets/VJ.png';
 import fluz from 'assets/fluz.png';
 import { motion } from 'framer-motion';
@@ -179,18 +179,18 @@ const ICodeRouter = () => {
 const ProjectContainer = styled(motion.div)`
   z-index:99;
   position: relative;
-  margin-left:100px;
   height: auto;
   width: calc(100%-100px);
   display: grid;
 
   
   @media ${device.mobileS} {
-    top:70px;
+    top:20vw;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(12, calc(60vw - 0.1rem));
+    grid-template-rows: repeat(11, calc(60vw - 0.1rem));
+    margin-left:0px;
     grid-template-areas:
-      '. g2 g2 g2'
+      '. g2 g2 g2 '
       '. g3 g3 g3'
       '. g4 g4 g4'
       '. g5 g5 g5'
@@ -201,11 +201,16 @@ const ProjectContainer = styled(motion.div)`
       '. g10 g10 g10'
       '. g11 g11 g11'
       '. g12 g12 g12';
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px;
   }
 
   @media ${device.tablet} {
+    top:0;  
+    margin-left:100px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(12, calc(50vw - 2.4rem));
+    grid-template-rows: repeat(11, calc(50vw - 2.4rem));
     grid-template-areas:
       '. g2 g2 g2'
       '. g3 g3 g3'
@@ -225,7 +230,7 @@ const ProjectContainer = styled(motion.div)`
 
   @media ${device.laptop} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-    grid-template-rows: repeat(12, calc(40vw - 2.4rem));
+    grid-template-rows: repeat(11, calc(50vw - 2.4rem));
     grid-template-areas:
       '. . g2 g2 g2 .'
       '. . g3 g3 g3 .'

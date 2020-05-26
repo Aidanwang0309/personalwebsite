@@ -134,20 +134,20 @@ const DescriptionBlock = ({
 };
 
 const Container = styled(motion.div)`
-  ${'' /* background-color: ${props => props.theme.backgroundPrimary}; */}
   color:${(props) => props.theme.textPrimary};
   z-index: 9;
   position: relative;
-  top: 3rem;
-  width: calc(100%-100px);
-  min-height: 80vh;
+  min-height: 75vh;
   display:grid;
-  grid-template-areas:
+
+  @media ${device.mobileS} {
+    top: 10rem;
+    grid-template-areas:
     '. title . '
     '. content .';
-  @media ${device.mobileS} {
+    width:100%;
     grid-template-columns: 1fr 10fr 1fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 1fr 3fr;
     h2 {
       font-size: 2rem;
     }
@@ -157,7 +157,12 @@ const Container = styled(motion.div)`
   }
 
   @media ${device.tablet} {
-    grid-template-columns: 1fr 8fr 1fr;
+    top: 3rem;
+    width: calc(100%-100px);
+    grid-template-areas:
+    '. title . '
+    '. content .';
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 5fr;
     h2 {
       font-size: 2.5rem;
@@ -168,7 +173,7 @@ const Container = styled(motion.div)`
   }
 
   @media ${device.laptop} {
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr 4fr;
     p {
       font-size: 1.3rem;
@@ -196,7 +201,6 @@ const Description = styled(motion.div)`
 const Category = styled(motion.div)`
   font-weight: 300;
   display: inline-block;
-  margin: 10px 70px 15px 0;
   width: auto;
   font-size: 0.9rem;
   color:${(props) => props.theme.textPrimary};
@@ -205,10 +209,22 @@ const Category = styled(motion.div)`
     margin: 40px 70px 0 0;
   }
   h5 {
-    color: black;
+    color:${(props) => props.theme.textPrimary};
     font-weight: 600;
     margin: 0;
     font-size: 1rem;
+  }
+
+  @media ${device.mobileS} {
+    margin: 10px 4% 15px 0;
+
+  }
+  @media ${device.tablet} {
+    margin: 10px 14% 15px 0;
+
+  }
+  @media ${device.laptop} {
+
   }
 `;
 
@@ -229,6 +245,7 @@ const ProjectLink = styled.a`
   }
   span {
     letter-spacing: 0.4rem;
+    color:${(props) => props.theme.textLink};
   }
   .line {
     top: 28px;
@@ -236,7 +253,7 @@ const ProjectLink = styled.a`
     height: 1px;
     width: 50px;
     position: absolute;
-    background: black;
+    background:${(props) => props.theme.textLink};
     transition: ease-in all 0.2s;
     &:after {
       position: absolute;
@@ -247,7 +264,7 @@ const ProjectLink = styled.a`
       width: 10px;
       transform-origin: center right;
       transform: rotate(35deg);
-      background: black;
+      background:${(props) => props.theme.textLink};
     }
   }
 `;

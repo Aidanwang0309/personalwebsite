@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import styled from 'styled-components';
+import { device } from 'shared/theme';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -24,7 +25,7 @@ const PDFReader = ({ src }) => {
 
   return (
     <Container>
-      <Title>Research </Title>
+      {/* <Title>Research </Title> */}
       <Document
         className="pdf"
         file={src}
@@ -51,22 +52,17 @@ const PDFReader = ({ src }) => {
 };
 
 const Container = styled.div`
-  transform: translateY(30%);
   justify-items: center;
-  width: 100vw;
+  width:100%;
   min-height: 80vh;
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: 1fr 7fr;
   grid-template-areas:
     '. title .'
     '.  pdf  .';
-  margin-bottom: 20%;
-  .react-pdf__Page__canvas {
-    margin: 0 auto;
-  }
+  overflow:hidden;
   .pdf {
-    border: 1px solid grey;
     width: 100%;
     height: auto;
     grid-area: pdf;
@@ -82,12 +78,31 @@ const Container = styled.div`
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
+
+    @media ${device.mobileS} {
+ 
+    }
+    @media ${device.tablet} {
+
+    }
+    @media ${device.laptop} {
+      grid-template-columns: 1fr 4fr 1fr;
+    }
+  ${'' /* canvas{
+    max-width:100vw;
+    height:auto;
+  }
+  .react-pdf__Page__textContent{
+    max-width:100vw;
+    height:auto;
+  } */}
 `;
 
 const Title = styled.h2`
   grid-area: title;
   justify-self: start;
   font-size: 1.7rem;
+  color:${(props) => props.theme.textPrimary};
 `;
 
 const Button = styled.span`

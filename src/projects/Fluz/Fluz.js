@@ -4,10 +4,11 @@ import { DescriptionBlock } from 'components/DescriptionBlock';
 import { motion } from 'framer-motion';
 import zendesk from 'assets/zendesk.png';
 import purpose from 'assets/purpose.png';
+import { device } from 'shared/theme';
 
 const Fluz = () => {
   return (
-    <motion.div
+    <FluzContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -23,7 +24,10 @@ const Fluz = () => {
         plink="HTTPS://SUPPORT.FLUZ.APP/HC/EN-US"
       />
       <ImgContainer>
-        <Image src={zendesk} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Image src={zendesk} />
+        </div>
+
       </ImgContainer>
 
       <DescriptionBlock
@@ -36,28 +40,50 @@ const Fluz = () => {
         plink="HTTPS://PEDANTIC-DAVINCI-522CBA.NETLIFY.COM"
       />
       <ImgContainer>
-        <Image src={purpose} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Image src={purpose} />
+        </div>
       </ImgContainer>
-    </motion.div>
+    </FluzContainer>
   );
 };
 
-const Container = styled.div`
-  position: relative;
-  display: grid;
-  height: 600px;
-  margin-top: 15%;
-  grid-template-columns: 1fr 5fr 1fr;
-  img {
-    grid-column-start: 2;
+const FluzContainer = styled.div`
+
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
   }
-`;
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
+
 const ImgContainer = styled.div`
   position: relative;
-  top: 150px;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
   margin-bottom: 50px;
+  display: grid;
+
+  @media ${device.mobileS} {
+    top: 150px;
+  }
+  @media ${device.tablet} {
+    top: 0px;
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
 `;
 
 const Image = styled(motion.img)`

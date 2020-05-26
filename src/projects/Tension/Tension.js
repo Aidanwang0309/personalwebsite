@@ -4,6 +4,7 @@ import { DescriptionBlock } from 'components/DescriptionBlock';
 import { motion } from 'framer-motion';
 import { TextBlock } from 'components/TextBlock';
 import { VideoBlock } from 'components/VideoBlock';
+import { device } from 'shared/theme';
 
 const Tension = () => {
   return (
@@ -39,6 +40,24 @@ In this immersive experience, the audience is invited to interact with a live da
 const Container = styled(motion.div)`
   position: relative;
   height: auto;
+  @media ${device.mobileS} {
+    transform:translateY(-7%);
+    ${'' /* margin-left:0px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
 `;
 
 const Image = styled(motion.img)`

@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import tableau from 'tableau-api';
+import styled from 'styled-components';
 
 const Tableau = () => {
   let vizUrl;
@@ -19,7 +20,7 @@ const Tableau = () => {
   return (
     <div
       className="tableau"
-      style={{ overflow: 'hidden' }}
+      style={{ overflow: 'hidden', width:'100%' }}
       ref={div => {
         vizContainer = div;
       }}

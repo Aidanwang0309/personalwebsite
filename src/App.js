@@ -85,7 +85,7 @@ const App = () => {
 const Body = style.div`
  background-color: ${props => props.theme.backgroundPrimary};
  height:100%;
- padding-bottom:35px;
+ padding-bottom:20vh;
 `
 
 export default App

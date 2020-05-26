@@ -77,8 +77,8 @@ const Mapbox = () => {
 const DataOverlay = styled.div`
   position: absolute;
   z-index: 99;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 0;
+  right: 15vw;
   padding: 2rem 0;
   background: #ffffffe0;
   .data {

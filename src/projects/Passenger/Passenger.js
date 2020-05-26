@@ -12,6 +12,8 @@ import p1 from 'assets/p1.png';
 import p2 from 'assets/p2.png';
 import p3 from 'assets/p3.png';
 import p4 from 'assets/p4.png';
+import p5 from 'assets/p5.png';
+import { device } from 'shared/theme';
 
 const imageSet = [
   { src: s1, des: 'des' },
@@ -63,7 +65,7 @@ const description = (
 
 const Passenger = () => {
   return (
-    <Container
+    <PassengerContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -78,14 +80,38 @@ const Passenger = () => {
       />
       <TextBlock title="Description and Technology" description={description} />
       <SlidesContainer>
-        <Slides images={imageSet} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Slides images={imageSet} />
+        </div>
       </SlidesContainer>
       <SlidesContainer2>
-        <Slides images={imageSet2} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Slides images={imageSet2} />
+        </div>
       </SlidesContainer2>
-    </Container>
+    </PassengerContainer>
   );
 };
+
+const PassengerContainer = styled.div`
+@media ${device.mobileS} {
+  ${'' /* margin-left:0px;
+  background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+  repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+  background-size: 20% 100px; */}
+}
+@media ${device.tablet} {
+  margin-left:100px;
+  background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+  repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+  background-size: 25% 100px;
+}
+@media ${device.laptop} {
+  background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+  repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+  background-size: 16.7% 100px;
+}
+`
 
 const Container = styled(motion.div)`
   position: relative;
@@ -94,14 +120,39 @@ const Container = styled(motion.div)`
 
 const SlidesContainer = styled.div`
   position: relative;
-  width: 80%;
   margin: 0 auto;
+  ${'' /* display: grid; */}
+
+  @media ${device.mobileS} {
+    top: 150px;
+
+  }
+  @media ${device.tablet} {
+    top: 0px;
+
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
 `;
 
 const SlidesContainer2 = styled.div`
   position: relative;
-  width: 80%;
+  ${'' /* width: 80%; */}
   margin: 0 auto;
+  ${'' /* display: grid; */}
+
+  @media ${device.mobileS} {
+    top: 150px;
+
+  }
+  @media ${device.tablet} {
+    top: 0px;
+
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
 `;
 
 export default Passenger;

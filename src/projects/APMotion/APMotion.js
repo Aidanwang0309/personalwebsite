@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import { TextBlock } from 'components/TextBlock';
 import { PDFReader } from 'components/PDFReader';
 import ap from 'assets/ap.pdf';
+import { device } from 'shared/theme';
+import styled from 'styled-components';
 
 const APMotion = () => {
   return (
-    <motion.div
+    <APContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -27,12 +29,31 @@ const APMotion = () => {
       <TextBlock
         title="Description and Technology"
         description="
-      In this project, Our goal is to combine the physical and physiological data we collected and present straightforward data of the engagement level of participants. I took responsible to clean the motion data in Excel and import the geo data into three.js utilizing D3 data reader,The color tone of the dots present the heart rate and the size of the dot is combine with alpha wave, which is an index of engagement level.
-      "
+        In this project, Our goal is to combine the physical and physiological data we collected and present straightforward data of the engagement level of participants. I took responsible to clean the motion data in Excel and import the geo data into three.js utilizing D3 data reader,The color tone of the dots present the heart rate and the size of the dot is combine with alpha wave, which is an index of engagement level.
+        "
       />
       <PDFReader src={ap}></PDFReader>
-    </motion.div>
+    </APContainer>
   );
 };
+
+const APContainer = styled.div`
+  @media ${device.mobileS} {
+    ${'' /* background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
 
 export default APMotion;

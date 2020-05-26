@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { device } from 'shared/theme';
+import { configResponsive, useResponsive } from '@umijs/hooks';
+
+configResponsive({
+  small: 320,
+  middle: 768,
+  large: 1024,
+});
+
 
 const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] };
 
@@ -48,12 +56,25 @@ const LetterVariants = {
   }
 }
 
+const BackgroundLetterVariants = {
+  active: {
+    opacity: 1,
+    transition: { duration: 0.85, ease: "easeInOut", }
+  },
+  inactive: {
+    opacity: 0.2,
+    transition: { duration: 0.85, ease: "easeInOut", }
+  }
+}
 
 const imageVariants = {
   active: {
-    scale: [0.95, 1, 0.95],
-    transition: imageTransition,
-    opacity: [0.6, 0.8, 0.6],
+    scale: 1,
+    transition: {
+      duration: 0.85,
+      ease: "easeInOut",
+    },
+    opacity: 1,
   },
 
   inactive: {
@@ -66,10 +87,27 @@ const imageVariants = {
   },
 }
 
+const mobileImageVariants = {
+  active: {
+    opacity: [0.85, 1, 0.85],
+    scale: [1, 1, 1],
+    transition: imageTransition,
+  },
+
+  inactive: {
+    scale: 0.8,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+}
 
 
 const Block = ({ id, title, categories, img, link, grid }) => {
-
+  const responsive = useResponsive();
   const [active, setActive] = useState(false);
 
   const onHoverStart = () => {
@@ -81,9 +119,12 @@ const Block = ({ id, title, categories, img, link, grid }) => {
   }
 
   return (
-    <BlockContainer variants={thumbnailVariants} grid={grid} onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
+    <BlockContainer
+      variants={thumbnailVariants}
+      grid={grid}
+      onHoverStart={onHoverStart}
+      onHoverEnd={onHoverEnd}>
       <BlockLink to={link}>
-
         <BackgroundText
           variants={BackgroundTextVariants}
           animate={active ? 'active' : 'inactive'}
@@ -91,7 +132,7 @@ const Block = ({ id, title, categories, img, link, grid }) => {
           <div style={{ width: '100%' }}>
             {[...title].map(letter =>
               <div style={{ display: 'inline-block', overflow: 'hidden' }}>
-                <motion.span className="overlayLetter" variants={LetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
+                <motion.span style={{ display: 'inline-block' }} className="overlayLetter" variants={responsive.middle && BackgroundLetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
               </div>)}
             <OverlayText>
               {categories.map(category => <span> {category} </span>)}
@@ -100,16 +141,7 @@ const Block = ({ id, title, categories, img, link, grid }) => {
         </BackgroundText>
 
         <Avatar>
-          {img && <motion.img src={img} variants={imageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
-          <TextContainer>
-            <OverlayText>
-              <div style={{ width: '100%' }}>{[...title].map(letter =>
-                <div style={{ display: 'inline-block', overflow: 'hidden' }}>
-                  <motion.span className="overlayLetter" variants={LetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
-                </div>)}
-              </div>
-            </OverlayText>
-          </TextContainer>
+          {img && <motion.div style={{ filter: 'brightness(0.5)', width: '100%', height: '100%', background: `url(".${img}") 50% 0%`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} variants={responsive.middle ? imageVariants : mobileImageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
         </Avatar>
 
       </BlockLink>
@@ -123,28 +155,15 @@ const BlockContainer = styled(motion.div)`
   position: relative;
   grid-area: ${props => `${props.grid}`};
   padding:1px;
-  padding-top: 10%;
   border-bottom: none;
+  @media ${device.mobileS} {
+    padding-top: 0;
+
+  }
+  @media ${device.tablet} {
+    padding-top: 10%;
+  }
 `;
-
-const TextContainer = styled.div`
-  position:absolute;
-  left:0;
-  bottom:0;
-  display:flex;
-  flex-direction:column;
-  text-align:left;
-  width:100%;
-  h1{
-    margin-top:0;
-    color:${props => `#${props.color}`};
-  }
-  p{
-    margin-top:0;
-    color:white;
-  }
-`
-
 
 const BlockLink = styled(Link)`
   width: 100%;
@@ -170,7 +189,6 @@ const Avatar = styled.div`
     top:0;
     width:100%;
     opacity:0;
-
   }
 
   @media ${device.mobileS} {
@@ -185,7 +203,7 @@ const OverlayText = styled(motion.div)`
   @media ${device.mobileS} {
     span {
       padding-left: 0.3rem;
-      font-size: calc(0.3rem + 0.55vw);
+      font-size: calc(0.6rem + 0.55vw);
       font-weight: 300;
     }
     div {
@@ -213,7 +231,7 @@ const OverlayText = styled(motion.div)`
       font-size: calc(1.3rem + 0.65vw);
       font-weight: 300;
       display:inline-block;
-
+      
     }
     }
   }
@@ -221,17 +239,18 @@ const OverlayText = styled(motion.div)`
 
 const BackgroundText = styled(motion.div)`
   position:absolute;
-  left:-10vw;
   bottom:25%;
-  color: #90909040;
+  color: ${prop => prop.theme.textPrimary};
   z-index:999;
   
   @media ${device.mobileS} {
     font-size:calc(1rem + 5vw);
+    left:-20vw;
   }
 
   @media ${device.tablet} {
     font-size:calc(2rem + 5vw);
+    left:-16vw;
   }
 `;
 
@@ -269,3 +288,13 @@ export default Block;
 //   '8186d5',
 //   '00bfa5'
 // ];
+
+{/* <TextContainer>
+            <OverlayText>
+              <div style={{ width: '100%' }}>{[...title].map(letter =>
+                <div style={{ display: 'inline-block', overflow: 'hidden' }}>
+                  <motion.span className="overlayLetter" variants={LetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
+                </div>)}
+              </div>
+            </OverlayText>
+          </TextContainer> */}

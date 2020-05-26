@@ -25,10 +25,6 @@ const CreativeBlock = ({ word, width, grid }) => {
 };
 
 const CreativeContainer = styled(motion.div)`
-  ${'' /* position: relative; */}
-  ${'' /* grid-area: ${props => `${props.grid}`}; */}
-  ${'' /* display: flex;
-  justify-content: start; */}
   z-index:1;
   position: fixed;
 `;

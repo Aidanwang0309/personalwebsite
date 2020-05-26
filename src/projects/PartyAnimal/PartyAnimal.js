@@ -7,6 +7,8 @@ import { Slides } from 'components/Slides';
 import party1 from 'assets/party1.gif';
 import party2 from 'assets/party2.png';
 import party3 from 'assets/party3.png';
+import { device } from 'shared/theme';
+
 
 const imageSet = [
   { src: party1, des: 'des' },
@@ -53,7 +55,7 @@ const descDetail = (
 
 const EventsManager = () => {
   return (
-    <motion.div
+    <PartyContainer
       initial="exit"
       animate="enter"
       exit="exit"
@@ -72,16 +74,49 @@ const EventsManager = () => {
 
       <TextBlock title="Description and Technology" description={descDetail} />
       <Container>
-        <Slides images={imageSet} />
+        <div style={{ gridColumnStart: 2 }}>
+          <Slides images={imageSet} />
+        </div>
       </Container>
-    </motion.div>
+    </PartyContainer>
   );
 };
 
+const PartyContainer = styled.div`
+  @media ${device.mobileS} {
+    ${'' /* margin-left:0px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px; */}
+  }
+  @media ${device.tablet} {
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+  }
+`
+
 const Container = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  display: grid;
+
+  @media ${device.mobileS} {
+
+  }
+  @media ${device.tablet} {
+
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
 `;
 
 export default EventsManager;
