@@ -147,7 +147,7 @@ const Container = styled(motion.div)`
     '. content .';
     width:100%;
     grid-template-columns: 1fr 10fr 1fr;
-    grid-template-rows: 1fr 3fr;
+    grid-template-rows: 0fr 3fr;
     h2 {
       font-size: 2rem;
     }
@@ -163,7 +163,7 @@ const Container = styled(motion.div)`
     '. title . '
     '. content .';
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 0fr 5fr;
     h2 {
       font-size: 2.5rem;
     }

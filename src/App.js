@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect, useRef} from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme} from 'shared/theme'
 import * as routes from 'shared/constants/routes'
@@ -86,6 +86,8 @@ const Body = style.div`
  background-color: ${props => props.theme.backgroundPrimary};
  height:100%;
  padding-bottom:20vh;
+ max-width: 100%;
+ overflow-x: hidden;
 `
 
 export default App

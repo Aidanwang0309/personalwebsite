@@ -97,6 +97,7 @@ const Header = ({ isDark, onChangeTheme }) => {
     setChecked((x) => !x)
     onChangeTheme()
   }
+
   const handleToggle = () => {
     setIsOpen((x) => !x)
   }
@@ -121,7 +122,7 @@ const Header = ({ isDark, onChangeTheme }) => {
   }
 
   return (
-    <NavContainer initial='initial' animate='enter' exit='exit' variants={navContainerVariants}>
+    <NavContainer initial='initial' animate='enter' exit='exit' variants={navContainerVariants} >
       <Logo initial='initial' exit='exit' animate='enter' variants={logoVariants}>
         <motion.svg
           xmlns='http://www.w3.org/2000/svg'
@@ -211,7 +212,12 @@ const Header = ({ isDark, onChangeTheme }) => {
 
       <Nav initial={false} exit='exit' animate={isOpen ? 'open' : 'closed'} ref={containerRef}>
         <NavList navList={navList} isOpen={isOpen} />
-        <NavBg className='background' variants={sidebar}>
+        <NavBg
+          className='background'
+          variants={sidebar}
+          style={{
+            height: `${isOpen ? '100%' : '0%'}`
+          }} >
           <Particles></Particles>
         </NavBg>
         <NavButton toggle={() => handleToggle()} onClick={handleToggle} />
@@ -234,7 +240,7 @@ const Header = ({ isDark, onChangeTheme }) => {
           />
         </motion.svg>
       </LogoText>
-    </NavContainer>
+    </NavContainer >
   )
 }
 
@@ -257,9 +263,9 @@ const NavBg = styled(motion.div)`
 `
 
 const NavContainer = styled.section`
+  z-index: 9999;
   position: relative;
   position: fixed;
-  z-index: 9999;
   justify-content: space-around;
   display:flex;
   justify-content: space-between;

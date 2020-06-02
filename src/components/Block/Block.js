@@ -143,7 +143,6 @@ const Block = ({ id, title, categories, img, link, grid }) => {
         <Avatar>
           {img && <motion.div style={{ filter: 'brightness(0.5)', width: '100%', height: '100%', background: `url(".${img}") 50% 0%`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} variants={responsive.middle ? imageVariants : mobileImageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
         </Avatar>
-
       </BlockLink>
     </BlockContainer>
   );

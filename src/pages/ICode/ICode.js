@@ -177,12 +177,12 @@ const ICodeRouter = () => {
 };
 
 const ProjectContainer = styled(motion.div)`
-  z-index:99;
+  z-index:999 !important;
   position: relative;
   height: auto;
   width: calc(100%-100px);
   display: grid;
-
+  padding-bottom: clamp(10vh 15vh 20vh);
   
   @media ${device.mobileS} {
     top:20vw;

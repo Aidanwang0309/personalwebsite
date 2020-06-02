@@ -153,7 +153,7 @@ const Particles = () => {
     const mouse = useRef([300, -200])
     const onMouseMove = useCallback(({ clientX: x, clientY: y }) => (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]), [])
     return (
-        // <div style={{ 'zIndex': '99' }}>
+        // <div style={{ 'zIndex': '-1' , 'height':'100%', }}>
             <Canvas
                 camera={{ fov: 100, position: [0, 0, 30] }}
                 onMouseMove={onMouseMove}
@@ -166,7 +166,7 @@ const Particles = () => {
                     <planeBufferGeometry attach="geometry" args={[100, 100]} />
                     <meshStandardMaterial attach="material" color="#00ffff" depthTest={false} />
                 </mesh>
-                <Swarm mouse={mouse} count={100} />
+                <Swarm mouse={mouse} count={350} />
                 {/* <Box position={[3, 3, 20]} /> */}
                 <Effect down={down} />
             </Canvas>

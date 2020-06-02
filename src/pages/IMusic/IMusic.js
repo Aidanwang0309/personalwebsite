@@ -33,7 +33,7 @@ const ProjectContainer = styled(motion.div)`
   height: auto;
   width: calc(100%-100px);
   height:100vh;
-  z-index:999;
+  z-index:99;
 
   @media ${device.mobileS} {
     top:20vw;

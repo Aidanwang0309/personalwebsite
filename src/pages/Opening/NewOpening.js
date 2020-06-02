@@ -6,7 +6,7 @@ import { device } from 'shared/theme';
 // import css from "./styles.module.scss"
 import { Canvas, useFrame } from 'react-three-fiber'
 import Text from './Text'
-
+import avatar from "assets/avatar.png"
 
 function Jumbo() {
     const ref = useRef()
@@ -77,6 +77,10 @@ const Opening = () => {
             <IntroContainer variants={navItemVariants}>
                 <NavLink to="/idesign">DESIGN</NavLink>
             </IntroContainer> */}
+            {/* <ImgContainer>
+                <motion.img src={avatar}></motion.img>
+            </ImgContainer> */}
+            
         </ProjectContainer>
     );
 }
@@ -85,10 +89,44 @@ const Opening = () => {
 const ProjectContainer = styled(motion.div)`
     height:100vh;
     background:${props => props.theme.backgroundPrimary};
+    width: calc(100%-100px);
+    display: grid;
 
-    ${'' /* cursor:none; */}
+  @media ${device.mobileS} {
+    top:20vw;
+    margin-left:0px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 20% 100px;
+  }
+
+  @media ${device.tablet} {
+    top:0;  
+    margin-left:100px;
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+    repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 25% 100px;
+  }
+
+  @media ${device.laptop} {
+    background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
+        repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
+    background-size: 16.7% 100px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-areas:
+      '. . img img img .'
+  }
 `;
 
+const ImgContainer = styled(motion.div)`
+    grid-area: img;
+    position:relative;
+    img{
+        bottom:0;
+        width:100%;
+        position:absolute;
+    }
+`
 
 const IntroContainer = styled(motion.div)`
     background-color: ${props => props.theme.backgroundPrimary};
