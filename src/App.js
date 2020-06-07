@@ -85,7 +85,6 @@ const App = () => {
 const Body = style.div`
  background-color: ${props => props.theme.backgroundPrimary};
  height:100%;
- padding-bottom:20vh;
  max-width: 100%;
  overflow-x: hidden;
 `

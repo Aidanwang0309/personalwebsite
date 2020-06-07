@@ -1,212 +1,278 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { device } from 'shared/theme';
-// import css from "./styles.module.scss"
-import { Canvas, useFrame } from 'react-three-fiber'
 import Text from './Text'
 import avatar from "assets/avatar.png"
 
-function Jumbo() {
-    const ref = useRef()
-    useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
-    return (
-        <group ref={ref}>
-            <Text hAlign="left" position={[0, 4.2, 0]} children="REACT" />
-            {/* <Text hAlign="left" position={[0, 0, 0]} children="THREE" />
-            <Text hAlign="left" position={[0, -4.2, 0]} children="FIBER" />
-            <Text hAlign="left" position={[12, 0, 0]} children="4" size={3} />
-            <Text hAlign="left" position={[16.5, -4.2, 0]} children="X" /> */}
-        </group>
-    )
+const navItemContainerVariants = {
+  initial: {
+    height: 0,
+  },
+  enter: {
+    height: '100%',
+    transition: {
+      duration: 0.5
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 3 }
+  }
 }
 
 const navItemVariants = {
-    initial: {
-        opacity: 0,
-    },
-    enter: {
-        opacity: 1,
-        transition: { duration: 1 }
-    },
-    exit: {
-        opacity: 0,
-        transition: { duration: 2 }
+  initial: {
+    y: '0%',
+  },
+  enter: {
+    y: '-50%',
+    // opacity: 1,
+    transition: {
+      duration: 30,
+      yoyo: Infinity,
+      // delay: 1,
     }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 3 }
+  }
+}
+
+
+const navItemVariants2 = {
+  initial: {
+    y: '-50%',
+  },
+  enter: {
+    y: '0%',
+    // opacity: 1,
+    transition: {
+      duration: 30,
+      yoyo: Infinity,
+      // delay: 1,
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 3 }
+  }
+}
+
+const ProfileVariants = {
+  initial: {
+  },
+  enter: {
+    transition: {
+      duration: 1,
+      delay: 1.5,
+      staggerChildren: 0.5
+    }
+  },
+  exit: {
+  }
+}
+
+const ProfileItemVariants = {
+  initial: {
+    y: -100,
+    opacity: 0,
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 2,
+    }
+  },
+  exit: {
+  }
 }
 
 const navContainerVariants = {
-    initial: {
-        opacity: 0,
-        width: 0,
-    },
-    enter: {
-        opacity: 1,
-        width: '100%',
-        transition: { duration: 1.5, staggerChildren: 0.5 }
-    },
-    exit: {
-        opacity: 0,
-        transition: { duration: 3, staggerChildren: 0.3 }
-    }
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+    transition: { duration: 1, staggerChildren: 0.5 }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 1, staggerChildren: 0.5 }
+  }
 }
+
+const LinkMap = [
+  { link: '/icode', text: 'CODER CODER CODER' },
+  { link: '/', text: 'PHOTOGRAPHER PHOTOGRAPHER' },
+  { link: '/imusic', text: 'MUSIC PRODUCER ' },
+  { link: '/idesign', text: 'UI & UX DESIGNER' },
+  { link: '/', text: 'EXPLORER EXPLORER' },
+  { link: '/icode', text: 'INTERACTIVE ARTIST' },
+]
 
 const Opening = () => {
+  return (
+    <OpenContainer
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={navContainerVariants}
+      height={window.innerHeight}
+    >
+      <Profile variants={ProfileVariants} >
+        <motion.span variants={ProfileItemVariants} >HI, I'M SHUAI WANG</motion.span><br /><br />
+        <motion.span variants={ProfileItemVariants}> A WEB DEVELOPER <br /> UI&UX DESIGNER <br /> AND MUSIC PRODUCER </motion.span><br /><br />
+        <motion.span variants={ProfileItemVariants}>I ENJOY DEVELOPING UNIQUE EXPERIENCE WITH MULTIMEDIA TO BUILD PROFOUND CONNECTION WITH MY AUDIENCE</motion.span>
+      </Profile>
 
-    const onMouseDown = () => {
-        const cursor = document.querySelector('#cursor');
-        cursor.style.width = `3rem`
-        cursor.style.height = `3rem`
-    }
-
-    return (
-        <ProjectContainer
-            initial="initial"
-            animate="enter"
-            exit="exit"
-            variants={navContainerVariants}
-        >
-
-            {/* <IntroContainer variants={navItemVariants}>
-                <NavLink onMouseDown={onMouseDown} to="/icode">CODE</NavLink>
-            </IntroContainer>
-            <IntroContainer variants={navItemVariants}>
-                <NavLink to="/imusic">MUSIC</NavLink>
-            </IntroContainer>
-            <IntroContainer variants={navItemVariants}>
-                <NavLink to="/idesign">DESIGN</NavLink>
-            </IntroContainer> */}
-            {/* <ImgContainer>
-                <motion.img src={avatar}></motion.img>
-            </ImgContainer> */}
-            
-        </ProjectContainer>
-    );
+      {LinkMap.map((link, index) =>
+        <IntroContainer key={index} index={index} variants={navItemContainerVariants}>
+          <NavItemOverlay index={index} img={avatar}>
+            <NavItem variants={[0, 2, 4].includes(index) ? navItemVariants : navItemVariants2} index={index}>
+              <NavLink index={index} to={link.link}  >{link.text}</NavLink>
+            </NavItem>
+          </NavItemOverlay>
+        </IntroContainer>)
+      }
+    </OpenContainer>
+  );
 }
 
 
-const ProjectContainer = styled(motion.div)`
-    height:100vh;
-    background:${props => props.theme.backgroundPrimary};
-    width: calc(100%-100px);
+const OpenContainer = styled(motion.div)`
+    height:${props => `${props.height}px`};
+    overflow:hidden;
     display: grid;
 
   @media ${device.mobileS} {
-    top:20vw;
-    margin-left:0px;
+    position:relative;
     background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
     repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
     background-size: 20% 100px;
+    grid-template-columns: repeat(5, 1fr);
   }
 
   @media ${device.tablet} {
+    transform:translateX(100px);
     top:0;  
-    margin-left:100px;
     background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
     repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
     background-size: 25% 100px;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   @media ${device.laptop} {
     background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
         repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
     background-size: 16.7% 100px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-    grid-template-areas:
-      '. . img img img .'
+    grid-template-columns: repeat(6, 1fr);
   }
 `;
 
-const ImgContainer = styled(motion.div)`
-    grid-area: img;
-    position:relative;
-    img{
-        bottom:0;
-        width:100%;
-        position:absolute;
-    }
-`
-
-const IntroContainer = styled(motion.div)`
-    background-color: ${props => props.theme.backgroundPrimary};
-    height:33.4%;
-    display:flex;
-    align-content:center;
-    align-items:center;
-    padding-left:10vw;
-    ${'' /* margin-left:10vw;
-    transition:all ease-in-out 0.3s;
-
-    :hover {
-        a{
-            text-shadow: -8px -8px 15px #333333,
-                8px 8px 15px #0d0d0d;
-        }
-    } */}
-
-
-  ${'' /* margin-bottom:1rem;
-  padding: 15px 25px;
-  border-radius: 5px;
-  background: #202020;
-
-  cursor:pointer;
-
-  h2{
-    font-size:1rem; 
-    color:#d0d0d0;
-  }
-
-  :hover {
-    a{
-      transform:translateX(20px)
-      -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-      -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-      animation: neon2 1.5s ease-in-out infinite alternate;
-    }
-
-  }
-  @keyframes neon2 {
-      from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
-          0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
-      }
-      to {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
-          0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
-      }
-    }
+const NavItemOverlay = styled(motion.div)`
+  height:100vh;
+  background-size:cover;
 
   @media ${device.mobileS} {
-    margin-bottom:2rem;
+    height:35vh;
+    transform:${props => `translateY(${(16 - props.index) * 4}vh)`};
+    background-image: ${props => `url(${[1, 2, 3].includes(props.index) ? props.img : null})`};
+    background-position-x:${ props => { return `${(props.index - 1) * -20}vw` }};
+  }
 
-    h2{
-      font-size:1.5rem; 
-    } */}
+  @media ${device.tablet} {
+    height:100vh;
+    transform:none;
+    background-image: ${props => `url(${props.index >= 2 ? props.img : null})`};
+    background-position-x:${ props => { return `${(props.index - 2) * -25}vw` }};
+  }
+
+  @media ${device.laptop} {
+    background-image: ${props => `url(${props.index >= 3 ? props.img : null})`};
+    background-position-x:${ props => { return `${(props.index - 3) * -16.6}vw` }};
+  }
+`
+
+const NavItem = styled(motion.div)`
+  @media ${device.mobileS} {
+    opacity:0.1;
+  }
+  @media ${device.tablet} {
+    opacity:1;
   }
 `
 
 const NavLink = styled(Link)`
   text-decoration: none;
-  font-size: 13vw;
+  font-size: 14vw;
   font-weight: 1000;
-  ${'' /* cursor:none; */}
+  width:100%;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
   color:  ${props => props.theme.textPrimary};
-  
+  opacity: ${props => props.index < 3 ? 0.05 : 0.5}
 `;
 
+const Profile = styled(motion.div)`
+  position:absolute;
+  font-size:3vw;
+  color:  ${props => props.theme.textPrimary};
+  z-index: 999;
+  width:40vw;
+  margin-top:15vh;
+  padding-left:6vw;
+  text-align:right;
+
+  @media ${device.mobileS} {
+    padding-left:20vw;
+    font-weight:400;
+    font-size:4.5vw;
+    width:65vw;
+    text-align:left;
+  }
+  @media ${device.tablet} {
+    padding-left:6vw;
+    font-size:3vw;
+    width:40vw;
+    text-align:right;
+  }
+  @media ${device.laptop} {
+    padding-left:6vw;
+    font-size:3vw;
+    width:40vw;
+    text-align:right;
+  }
+`
+
+const IntroContainer = styled(motion.div)`
+    background:${props => props.theme.backgroundPrimary};
+    z-index:99;
+    overflow:hidden;
+    p{
+      text-decoration: none;
+      font-size: 7vw;
+      font-weight: 1000;
+      color:  ${props => props.theme.textPrimary};
+      margin:0;
+      margin-top:10vw;
+    }
+    @media ${device.mobileS} {
+      display: ${props => props.index <= 4 ? 'block' : 'none !important'};
+    }
+
+    @media ${device.tablet} {
+      display: ${props => props.index <= 3 ? 'block' : 'none'};
+    }
+
+    @media ${ device.laptop} {
+      display: block !important;
+    }
+`
+
+
 export default Opening;
-
-
-
-// <div>
-// <Canvas camera={{ position: [0, 0, 35] }}>
-//     <ambientLight intensity={2} />
-//     <pointLight position={[40, 40, 40]} />
-//     <Suspense fallback={null}>
-//         <Jumbo />
-//         {/* <Birds /> */}
-//     </Suspense>
-// </Canvas>
-// </div>

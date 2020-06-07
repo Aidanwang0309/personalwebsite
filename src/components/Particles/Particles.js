@@ -166,7 +166,7 @@ const Particles = () => {
                     <planeBufferGeometry attach="geometry" args={[100, 100]} />
                     <meshStandardMaterial attach="material" color="#00ffff" depthTest={false} />
                 </mesh>
-                <Swarm mouse={mouse} count={350} />
+                <Swarm mouse={mouse} count={150} />
                 {/* <Box position={[3, 3, 20]} /> */}
                 <Effect down={down} />
             </Canvas>

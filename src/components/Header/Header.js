@@ -9,12 +9,22 @@ import { NavButton } from 'components/NavButton'
 import { NavList } from 'components/NavList'
 import { Particles } from 'components/Particles'
 import LOGO from 'assets/LOGO.svg'
-import { device } from 'shared/theme';
+import { device } from 'shared/theme'
+import INSTA from "assets/instagram.svg"
+import SOUNDCLOUD from "assets/soundcloud.svg"
+import LINKEDIN from "assets/linkedin.svg"
+
 
 const navList = [
   { name: 'code', link: '/icode' },
   { name: 'music', link: '/imusic' },
   { name: 'design', link: '/idesign' },
+]
+
+const icons = [
+  { link: "https://www.instagram.com/aspirincity/", icon: INSTA },
+  { link: "https://soundcloud.com/aspirin-wang", icon: SOUNDCLOUD },
+  { link: "https://www.linkedin.com/in/swang1993/", icon: LINKEDIN },
 ]
 
 const iconTextVariants = {
@@ -211,7 +221,10 @@ const Header = ({ isDark, onChangeTheme }) => {
       </Logo>
 
       <Nav initial={false} exit='exit' animate={isOpen ? 'open' : 'closed'} ref={containerRef}>
-        <NavList navList={navList} isOpen={isOpen} />
+        <NavList navList={navList} isOpen={isOpen} icons={icons} />
+        {/* <motion.div>
+          {icons.map(icon => <a href={icon.link} style={{ backgroundImage: `url(${icon.icon})` }}>  </a>)}
+        </motion.div> */}
         <NavBg
           className='background'
           variants={sidebar}
@@ -357,7 +370,7 @@ const Logo = styled(motion.div)`
     left:0;
     top:0;
     width:20%;
-    height:20vw;
+    height:21vw;
     border-right: 1px solid #ffffff40;
     svg{
       width:40px;
@@ -450,7 +463,7 @@ const LogoText = styled(motion.div)`
   @media ${device.mobileS} {
       position:fixed;
       top:-60px;
-      left:170px;
+      left:45vw;
       width:130px;
       height:106px;
     }
