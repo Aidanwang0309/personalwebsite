@@ -43,15 +43,15 @@ const BackgroundTextVariants = {
 
 const LetterVariants = {
   active: {
+    opacity: 1,
     x: 0,
     y: -15,
-    opacity: 1,
     transition: { duration: 0.85 }
   },
   inactive: {
+    opacity: 0,
     x: -30,
     y: -15,
-    opacity: 1,
     transition: { duration: 0.85 }
   }
 }
@@ -132,18 +132,20 @@ const Block = ({ id, title, categories, img, link, grid }) => {
           <div style={{ width: '100%' }}>
             {[...title].map(letter =>
               <div style={{ display: 'inline-block', overflow: 'hidden' }}>
-                <motion.span style={{ display: 'inline-block' }} className="overlayLetter" variants={responsive.middle && BackgroundLetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
+                <motion.span style={{ display: 'inline-block', fontWeight: '700' }} className="overlayLetter" variants={responsive.middle && BackgroundLetterVariants} animate={active ? 'active' : 'inactive'}>{letter}</motion.span>
               </div>)}
-            <OverlayText>
+            <OverlayText
+              variants={LetterVariants}
+            >
               {categories.map(category => <span> {category} </span>)}
             </OverlayText>
           </div>
         </BackgroundText>
-
-        <Avatar>
-          {img && <motion.div style={{ filter: 'brightness(0.5)', width: '100%', height: '100%', background: `url(".${img}") 50% 0%`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} variants={responsive.middle ? imageVariants : mobileImageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
-        </Avatar>
       </BlockLink>
+
+      <Avatar>
+        {img && <motion.div style={{ filter: 'brightness(0.5)', width: '100%', height: '100%', background: `url(".${img}") 50% 0%`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} variants={responsive.middle ? imageVariants : mobileImageVariants} perspective={2000} animate={active ? 'active' : 'inactive'} alt="project-avatar" />}
+      </Avatar>
     </BlockContainer>
   );
 };
@@ -171,9 +173,6 @@ const BlockLink = styled(Link)`
 `;
 
 const Avatar = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction:column;
   justify-content: center;
@@ -191,14 +190,29 @@ const Avatar = styled.div`
   }
 
   @media ${device.mobileS} {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
     img {
       height:(100% -10vh);
     }
+  }
+
+  @media ${device.tablet} {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top:25%;
+    left:45%;
   }
 `;
 
 const OverlayText = styled(motion.div)`
   width:100%;
+  opacity:0.7;
+  color:#4db795;
   @media ${device.mobileS} {
     span {
       padding-left: 0.3rem;
@@ -248,7 +262,7 @@ const BackgroundText = styled(motion.div)`
   }
 
   @media ${device.tablet} {
-    font-size:calc(2rem + 5vw);
+    font-size:calc(2rem + 2vw);
     left:-16vw;
   }
 `;

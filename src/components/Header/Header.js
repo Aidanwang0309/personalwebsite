@@ -265,7 +265,7 @@ const NavBg = styled(motion.div)`
   background: ${(props) => props.theme.backgroundPrimary};
 
   @media ${device.mobileS} {
-    top: 20vw;
+    top: 5rem;
     left: 0px;
   }
 
@@ -373,6 +373,7 @@ const Logo = styled(motion.div)`
     height:21vw;
     border-right: 1px solid #ffffff40;
     svg{
+      margin:0 auto;
       width:40px;
       height:40px;
       padding:5vw;
@@ -387,6 +388,9 @@ const Logo = styled(motion.div)`
     top:0;
     border-right: 0px;
     svg{
+      margin:0 auto;
+      width:60px;
+      height:40px;
       padding:10px;
     }
   }
@@ -445,7 +449,7 @@ const LogoText = styled(motion.div)`
     }
     @media ${device.mobileS} {
       position:fixed;
-      top:6vw;
+      top:1.5rem;
       left:0;
       width:30%;
       height:150px;

@@ -224,7 +224,7 @@ const Profile = styled(motion.div)`
   color:  ${props => props.theme.textPrimary};
   z-index: 999;
   width:40vw;
-  margin-top:15vh;
+  margin-top:10rem;
   padding-left:6vw;
   text-align:right;
 
@@ -259,7 +259,7 @@ const IntroContainer = styled(motion.div)`
       font-weight: 1000;
       color:  ${props => props.theme.textPrimary};
       margin:0;
-      margin-top:10vw;
+      margin-top:5rem;
     }
     @media ${device.mobileS} {
       display: ${props => props.index <= 4 ? 'block' : 'none !important'};

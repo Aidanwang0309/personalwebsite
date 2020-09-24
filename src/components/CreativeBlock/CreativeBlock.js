@@ -27,6 +27,9 @@ const CreativeBlock = ({ word, width, grid }) => {
 const CreativeContainer = styled(motion.div)`
   z-index:1;
   position: fixed;
+  top:0;
+  left:20%;
+  width:60%;
 `;
 
 export default CreativeBlock;

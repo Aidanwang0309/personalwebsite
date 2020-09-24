@@ -18,7 +18,7 @@ const IDesignBlockData = [
   {
     id: 1,
     component: Passenger,
-    title: 'Passenger',
+    title: '01.Passenger',
     categories: ['UI', 'UX'],
     image: passenger,
     link: 'passenger',
@@ -28,7 +28,7 @@ const IDesignBlockData = [
   {
     id: 2,
     component: Spotify,
-    title: 'Spotify Lib Redesign',
+    title: `02.Spotify Lib Redesign`,
     categories: ['UI', 'UX'],
     image: spotifycover,
     link: 'spotify',
@@ -38,7 +38,7 @@ const IDesignBlockData = [
   {
     id: 3,
     component: RandomUI,
-    title: 'Random UI',
+    title: '03.Random UI',
     categories: ['UI', 'UX'],
     image: UI4,
     link: 'random',
@@ -48,7 +48,7 @@ const IDesignBlockData = [
   {
     id: 4,
     component: Law,
-    title: 'Law Manager',
+    title: '04.Law Manager',
     categories: ['UI', 'UX'],
     image: lawcover,
     link: 'law-manager',
@@ -108,10 +108,10 @@ const ProjectContainer = styled(motion.div)`
   height: auto;
   width: calc(100%-100px);
   display: grid;
-  padding-bottom: clamp(10vh 15vh 20vh);
-  
+  padding-bottom: 15rem;
+  padding-top:10rem;
+
   @media ${device.mobileS} {
-    top:20vw;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(4, calc(60vw - 0.1rem));
     margin-left:0px;
@@ -142,7 +142,7 @@ const ProjectContainer = styled(motion.div)`
 
   @media ${device.laptop} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-    grid-template-rows: repeat(4, calc(50vw - 2.4rem));
+    grid-template-rows: repeat(4, calc(12vw - 2.4rem));
     grid-template-areas:
       '. . g1 g1 g1 .'
       '. . g2 g2 g2 .'

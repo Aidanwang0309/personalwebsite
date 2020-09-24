@@ -14,7 +14,9 @@ import { ImageCollage } from 'projects/ImageCollage';
 import { Marvin } from 'projects/Marvin';
 import { Tension } from 'projects/Tension';
 import { APMotion } from 'projects/APMotion';
+import { HelpMainStreet } from 'projects/HelpMainStreet';
 
+import helpMainStreet from "assets/helpMainStreet.png";
 import daily from 'assets/daily.png';
 import park from 'assets/park.png';
 import creative from 'assets/creative.gif';
@@ -33,102 +35,111 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 const ICodeBlockData = [
   {
     id: 1,
-    component: PartyAnimal,
-    title: `Party Manager`,
-    categories: ['WEB', 'UX', 'UI'],
-    image: party,
-    link: 'party-animal',
+    component: HelpMainStreet,
+    title: `01 . Help Main Street`,
+    categories: ['WEB'],
+    image: helpMainStreet,
+    link: 'help-main-street',
     grid: 'g2'
   },
   {
     id: 2,
-    component: SmallProjects,
-    title: 'Random',
+    component: PartyAnimal,
+    title: `02 . Party Manager`,
     categories: ['WEB', 'UX', 'UI'],
-    image: random,
-    link: 'random',
+    image: party,
+    link: 'party-animal',
     grid: 'g3'
   },
   {
     id: 3,
-    component: Fluz,
-    title: 'Fluz',
-    image: fluz,
+    component: SmallProjects,
+    title: '03.Random',
     categories: ['WEB', 'UX', 'UI'],
-    link: 'fluz',
+    image: random,
+    link: 'random',
     grid: 'g4'
   },
   {
     id: 4,
-    component: CreativeCoding,
-    title: 'CREATIVE',
-    categories: ['WEB', 'UX', 'UI', 'DESIGN'],
-    image: creative,
-    link: 'creative-coding',
+    component: Fluz,
+    title: '04.Fluz',
+    image: fluz,
+    categories: ['WEB', 'UX', 'UI'],
+    link: 'fluz',
     grid: 'g5'
   },
   {
     id: 5,
-    component: DailyOrange,
-    title: 'DO BASKETBALL',
-    categories: ['WEB', 'UX', 'UI'],
-    image: daily,
-    link: 'daily-orange',
+    component: CreativeCoding,
+    title: '05.CREATIVE',
+    categories: ['WEB', 'UX', 'UI', 'DESIGN'],
+    image: creative,
+    link: 'creative-coding',
     grid: 'g6'
   },
   {
     id: 6,
-    component: NYCParkCrime,
-    title: 'NYC PC DATAV',
-    categories: ['WEB', 'UX', 'UI', 'DATA'],
-    image: park,
-    link: 'park-crime-datav',
+    component: DailyOrange,
+    title: '06.DO BASKETBALL',
+    categories: ['WEB', 'UX', 'UI'],
+    image: daily,
+    link: 'daily-orange',
     grid: 'g7'
   },
   {
     id: 7,
-    component: VJ,
-    title: 'VJ',
-    image: vj,
-    categories: ['DESIGN', 'AUDIO'],
-    link: 'vj',
+    component: NYCParkCrime,
+    title: '07.NYC PC DATAV',
+    categories: ['WEB', 'UX', 'UI', 'DATA'],
+    image: park,
+    link: 'park-crime-datav',
     grid: 'g8'
   },
   {
     id: 8,
-    component: ImageCollage,
-    title: 'I-COLLAGE',
-    image: collage,
-    link: 'image-collage',
-    categories: ['DESIGN', 'WEB'],
+    component: VJ,
+    title: '08.VJ',
+    image: vj,
+    categories: ['DESIGN', 'AUDIO'],
+    link: 'vj',
     grid: 'g9'
   },
   {
     id: 9,
-    component: Marvin,
-    title: 'MARVIN',
-    categories: ['WEB', 'UX', 'UI', 'DATA'],
-    image: marvin,
-    link: 'marvin-billing-system',
+    component: ImageCollage,
+    title: '09.I-COLLAGE',
+    image: collage,
+    link: 'image-collage',
+    categories: ['DESIGN', 'WEB'],
     grid: 'g10'
   },
   {
     id: 10,
-    component: Tension,
-    title: 'T0S VR',
-    categories: ['VR', 'MUSIC', 'DANCE'],
-    image: tension,
-    link: 'tension-of-self',
+    component: Marvin,
+    title: '10.MARVIN',
+    categories: ['WEB', 'UX', 'UI', 'DATA'],
+    image: marvin,
+    link: 'marvin-billing-system',
     grid: 'g11'
   },
   {
     id: 11,
+    component: Tension,
+    title: '11.T0S VR',
+    categories: ['VR', 'MUSIC', 'DANCE'],
+    image: tension,
+    link: 'tension-of-self',
+    grid: 'g12'
+  },
+  {
+    id: 12,
     component: APMotion,
-    title: 'AP DATAV',
+    title: '12.AP DATAV',
     categories: ['WEB', 'MOTION-CAPTURE', 'DATA'],
     image: motionpic,
     link: 'ap-motion',
-    grid: 'g12'
+    grid: 'g13'
   }
 ];
 
@@ -136,6 +147,7 @@ const ICode = () => {
   let match = useRouteMatch();
   return (
     <ProjectContainer
+      className="ProjectContainer"
       initial="initial"
       animate="enter"
       exit="exit"
@@ -182,12 +194,12 @@ const ProjectContainer = styled(motion.div)`
   height: auto;
   width: calc(100%-100px);
   display: grid;
-  padding-bottom: clamp(10vh 15vh 20vh);
-  
+  padding-bottom: 20rem;
+  padding-top:10rem;
+
   @media ${device.mobileS} {
-    top:20vw;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(11, calc(60vw - 0.1rem));
+    grid-template-rows: repeat(12, calc(60vw - 0.1rem));
     margin-left:0px;
     grid-template-areas:
       '. g2 g2 g2 '
@@ -200,7 +212,8 @@ const ProjectContainer = styled(motion.div)`
       '. g9 g9 g9'
       '. g10 g10 g10'
       '. g11 g11 g11'
-      '. g12 g12 g12';
+      '. g12 g12 g12'
+      '. g13 g13 g13';
     background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
     repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
     background-size: 20% 100px;
@@ -210,7 +223,7 @@ const ProjectContainer = styled(motion.div)`
     top:0;  
     margin-left:100px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(11, calc(50vw - 2.4rem));
+    grid-template-rows: repeat(12, calc(50vw - 2.4rem));
     grid-template-areas:
       '. g2 g2 g2'
       '. g3 g3 g3'
@@ -222,7 +235,8 @@ const ProjectContainer = styled(motion.div)`
       '. g9 g9 g9'
       '. g10 g10 g10'
       '. g11 g11 g11'
-      '. g12 g12 g12';
+      '. g12 g12 g12'
+      '. g13 g13 g13';
     background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
     repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
     background-size: 25% 100px;
@@ -230,7 +244,7 @@ const ProjectContainer = styled(motion.div)`
 
   @media ${device.laptop} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-    grid-template-rows: repeat(11, calc(50vw - 2.4rem));
+    grid-template-rows: repeat(12, calc(12vw - 2.4rem));
     grid-template-areas:
       '. . g2 g2 g2 .'
       '. . g3 g3 g3 .'
@@ -242,7 +256,8 @@ const ProjectContainer = styled(motion.div)`
       '. . g9 g9 g9 .'
       '. . g10 g10 g10 .'
       '. . g11 g11 g11 .'
-      '. . g12 g12 g12 .';
+      '. . g12 g12 g12 .'
+      '. . g13 g13 g13.';;
   background-image: repeating-linear-gradient(#ccc 0 0px, transparent 0px 100%),
     repeating-linear-gradient(90deg,#cccccc1f 0 1px, transparent 1px 100%);
   background-size: 16.7% 100px;
